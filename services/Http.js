@@ -1,4 +1,4 @@
-import {Auth} from "./auth.js";
+import {Auth} from "./Auth.js";
 import config from "../config/config.js";
 
 export class HttpRequest {
