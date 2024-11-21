@@ -35,41 +35,51 @@ export default function UploadVideo() {
 
     // Обработка отправки формы
     const handleSubmit = async (event) => {
+
+        console.log('Видео отправлено для загрузки');
         event.preventDefault();
 
         const metadata = `[
-            {
-                "flavor": "dublincore/episode",
-                "fields": [{
-                    "id": "title",
-                    "value": "${videoTitle}"
-                }]
-            }
-        ]`
+  {
+    "flavor": "dublincore/episode",
+    "fields": [
+      {
+        "id": "title",
+        "value": ${videoTitle}
+      },
+      {
+        "id": "publisher",
+        "value": "Иванов Иван Иванович"
+      },
+    ]
+  }
+]`
 
         const formData = new FormData();
         formData.append("metadata", metadata);
         formData.append("presenter", videoFile);
         formData.append("processing", `{
-            "workflow": "lecture-process-with-includ",
-            "configuration": {
-                "flagForCutting": "false",
-                "flagForReview": "false",
-                "publishToEngage": "true",
-                "publishToHarvesting": "true",
-                "straightToPublishing": "true"
-            }
-        }`);
+  "workflow": "fast-testing-workflow",
+  "configuration": {
+    "flagForCutting": "false",
+    "flagForReview": "false",
+    "publishToEngage": "true",
+    "publishToHarvesting": "true",
+    "straightToPublishing": "true"
+  }
+}`);
         formData.append("acl",
-            `[{
-                "action": "write",
-                "role": "ROLE_ADMIN"
-            },
-                {
-                    "action": "read",
-                    "role": "ROLE_USER"
-                }]"`);
-        formData.append("workflow-id", "lecture-process-with-include");
+            `[
+  {
+    "action": "write",
+    "role": "ROLE_ADMIN"
+  },
+  {
+    "action": "read",
+    "role": "ROLE_USER"
+  }
+]`);
+        // formData.append("workflow-id", "lecture-process-with-include");
         const result = await uploadVideo(formData); // Отправляем данные
         console.log(result);
     };
@@ -84,7 +94,9 @@ export default function UploadVideo() {
                 </div>
             </div>
             <div className="upload-info">
-                <input className="upload-info-title upload-info-element" placeholder='Введите название'/>
+                <input className="upload-info-title upload-info-element" placeholder='Введите название'
+                value={videoTitle}
+                onChange={(e) => setVideoTitle(e.target.value)}/>
                 <textarea className="upload-info-description upload-info-element"
                           placeholder='Введите описание'></textarea>
                 <div>
@@ -94,13 +106,15 @@ export default function UploadVideo() {
                 </div>
                 <label htmlFor="">Добавить в плейлист</label>
                 <select name="city" id="city-select" className="upload-info-element">
-                    <option value="" disabled selected>-- Выберите плейлист --</option>
+                    <option value="" defaultValue>-- Не выбирать плейлист --</option>
                     <option value="petersburg">плейлист 1</option>
                     <option value="samara">плейлист 2</option>
                     <option value="perm">плейлист 3</option>
                     <option value="novosibirsk">плейлист 4</option>
                 </select>
             </div>
+
+            <button className="upload-button">Отправить</button>
         </form>
 
         // <form className="panel-control-content-form" onSubmit={handleSubmit}>

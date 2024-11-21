@@ -25,8 +25,6 @@ export default function Playlists() {
                 <div className="playlists-main">
                     <div className="playlists-main-title">Курсы</div>
                 </div>
-                <video controls="" playsInline="" preload="auto"
-                       src="http://localhost:1984/api/hls/playlist.m3u8?id=mKout30v"></video>
                 <div className="container">
                     <div className="playlists-search">
                         <input type="text" className="playlists-search-specialization playlists-search-element"

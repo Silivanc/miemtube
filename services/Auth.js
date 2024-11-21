@@ -12,7 +12,7 @@ export class Auth {
                     headers: {
                         'Content-type': 'application/json', //отправка
                         'Accept': 'application/json', //получение
-                        // 'is_redactor' : true
+                        'is_redactor' : true
                     }
                 });
 

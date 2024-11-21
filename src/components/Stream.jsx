@@ -61,7 +61,7 @@ function Stream() {
                 <p style={{ color: 'red' }}>Ошибка: {error}</p>
             ) : (
                 // <video src="http://localhost:1984/api/stream.mjpeg?src=str" controls style={{ width: '100%', maxWidth: '600px' }} />
-                <video src="http://localhost:80/api/stream.mp4?src=da18a155-d01d-4194-a0da-abf2c3c25ff7" autoPlay style={{ width: '100%', maxWidth: '600px' }}/>
+                <video src="http://localhost:80/api/stream.mp4?src=418c9e3b-c696-4bee-926f-7a47e1818eb2" autoPlay style={{ width: '100%', maxWidth: '600px' }}/>
                 )}
         </div>
     );

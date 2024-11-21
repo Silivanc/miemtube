@@ -8,9 +8,9 @@ export class HttpRequest {
         }
 
         if (body instanceof FormData) {
+
             params.headers = {
                 'Accept': 'application/json', //получение
-                'Content-type': 'application/json'
             }
         } else {
             params.headers = {

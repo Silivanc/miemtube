@@ -46,6 +46,14 @@
       height: 112px;
     }
   }
+
+  .upload-button {
+    padding: 0;
+    height: 62px;
+    border-radius: 31px;
+    background: var(--main-color);
+    margin-top: auto;
+  }
 }
 
 .panel-control-content-form {

@@ -3,13 +3,15 @@ import {useDropzone} from 'react-dropzone';
 import './Dropzone.scss'
 
 export default function Dropzone(props) {
-    const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
     const { onFileSelect } = props;
 
-    const handleFileSelect = (event) => {
-        const file = event.target.files[0];
-        onFileSelect(file);  // вызываем переданный callback
+    const onDrop = (acceptedFiles) => {
+        if (acceptedFiles.length > 0) {
+            onFileSelect(acceptedFiles[0]); // передаем первый файл в callback
+        }
     };
+
+    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({ onDrop });
 
     const files = acceptedFiles.map(file => (
         <li key={file.path}>
@@ -22,7 +24,6 @@ export default function Dropzone(props) {
             <div {...getRootProps({ className: 'dropzone-input' })}>
                 <input
                     {...getInputProps()}
-                    onChange={handleFileSelect}  // используем нашу функцию
                 />
                 <p>Загрузить файл</p>
                 <aside className="dropzone-file">
