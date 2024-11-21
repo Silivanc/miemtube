@@ -7,6 +7,7 @@ COPY package.json /usr/src/app/
 RUN npm install
 
 COPY . /usr/src/app
+RUN npm run build
 EXPOSE 5174
 
-CMD [ "npm", "run", "dev" ]
+CMD ["serve", "-s", "./dist"]
