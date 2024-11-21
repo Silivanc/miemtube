@@ -1,6 +1,6 @@
 import "./PanelControl.scss"
 import UploadVideo from "./UploadVideo.jsx";
-import UploadStream from "./uploadStream.jsx";
+import UploadStream from "./UploadStream.jsx";
 import {useMatch} from "react-router-dom";
 
 export default function PanelControl() {

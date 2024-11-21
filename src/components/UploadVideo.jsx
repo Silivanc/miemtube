@@ -49,7 +49,7 @@ export default function UploadVideo() {
       },
       {
         "id": "publisher",
-        "value": "Иванов Иван Иванович"
+        "value": "Admin"
       },
     ]
   }
