@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  stream-frontend:
+    image: registry.miem.hse.ru/miemtube/frontend
+    env_file:
+      - ./config/config.js:/usr/src/app/config/config.js
+
+    ports:
+      - "5174:5174"
+
+    networks:
+      - stream-frontend
+
+
+networks:
+  stream-frontend:
+    driver: bridge
+
