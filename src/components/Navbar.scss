@@ -1,0 +1,38 @@
+nav {
+  position: sticky;
+  top: 0;
+  padding: 21px 38px;
+  box-sizing: border-box;
+  color: white;
+  font-size: 16px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #112D69;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  z-index: 100;
+  width: 100%;
+
+  .tabs {
+    display: flex;
+    align-items: center;
+
+    .tabs-logo {
+      margin-right: 35px;
+    }
+
+    .tabs-points {
+      display: flex;
+
+      a {
+        text-decoration: none;
+        color: #ffffff;
+      }
+
+      .tabs-point {
+        padding: 0 18px;
+      }
+    }
+  }
+}

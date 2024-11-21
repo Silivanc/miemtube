@@ -1,0 +1,133 @@
+@mixin player-title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32.45px;
+}
+
+.player {
+
+  .container {
+    padding-top: 16px;
+    display: flex;
+    justify-content: flex-start;
+
+    .player-main {
+      padding: 0;
+      max-width: 899px;
+      margin-right: 16px;
+
+      .player-main-video {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        margin-bottom: 16px;
+        border-radius: 20px;
+      }
+
+      .player-main-title {
+        @include player-title;
+        margin-bottom: 7px;
+      }
+
+      .player-main-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        font-size: 16px;
+
+        .player-main-info-tutor {
+          display: flex;
+          align-items: center;
+
+          .player-main-info-tutor-photo {
+            margin-right: 21px;
+          }
+        }
+
+        .player-main-info-date {
+          display: flex;
+          align-items: center;
+
+          svg {
+            margin-right: 11px;
+          }
+        }
+
+        .player-main-info-views {
+          display: flex;
+          align-items: center;
+
+          svg {
+            margin-right: 4px;
+          }
+        }
+      }
+
+      .player-main-course {
+        margin-bottom: 33px;
+      }
+    }
+
+    .player-recommend {
+      max-width: 400px;
+
+      .player-recommend-next {
+        margin-bottom: 11px;
+
+        .player-recommend-next-text {
+          @include player-title;
+          margin-bottom: 11px;
+        }
+      }
+
+      .player-recommend-videos {
+
+        .player-recommend-videos-text {
+          @include player-title;
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+}
+
+.player-recommend-video {
+  margin-bottom: 12px;
+  
+  a {
+    display: flex;
+
+    .player-recommend-video-preview {
+      width: 216px;
+      height: 120px;
+      background: gray;
+      margin-right: 16px;
+      flex-shrink: 0;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .player-recommend-video-info {
+      display: flex;
+      flex-direction: column;
+      bottom: 7px;
+      font-size: 16px;
+      text-decoration: none;
+      color: #000000;
+
+      .player-recommend-video-info-title {
+        font-weight: 600;
+        margin-bottom: 21px;
+        max-height: 89px;            /* Ограничение по высоте */
+        overflow: hidden;            /* Скрывает излишний текст */
+        display: -webkit-box;        /* Включает режим flexbox */
+        -webkit-box-orient: vertical; /* Устанавливает вертикальную ориентацию */
+        -webkit-line-clamp: 3;       /* Ограничение количества строк */
+      }
+
+    }
+  }
+}

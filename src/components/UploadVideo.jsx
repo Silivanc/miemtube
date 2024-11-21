@@ -1,0 +1,149 @@
+import config from "../../config/config.js";
+import "./UploadVideo.scss"
+import React, {useState, useEffect} from 'react';
+import {HttpRequest} from "../../services/Http.js";
+import Dropzone from "./Dropzone.jsx";
+import {useMatch} from "react-router-dom";
+
+export default function UploadVideo() {
+
+    const match = useMatch('/upload:page');
+    const page = match?.params.page
+
+    const [playlists, setPlaylists] = useState("");
+    const [videoFile, setVideoFile] = useState("");
+    const [videoTitle, setVideoTitle] = useState("");
+    const [videoPlaylist, setVideoPlaylist] = useState("");
+    // Функция для получения видео (используем внутри useEffect)
+    useEffect(() => {
+        async function fetchVideo() {
+            try {
+                const result = await getPlaylists();  // Ждем асинхронный запрос
+                setPlaylists(result);  // Обновляем состояние с результатом
+            } catch (error) {
+                console.error('Error fetching videos:', error);
+            }
+        }
+
+        fetchVideo();  // Вызываем асинхронную функцию при монтировании компонента
+    }, []);  // Пустой массив зависимостей означает, что эффект выполнится один раз при монтировании
+
+    const handleFileSelect = (file) => {
+        setVideoFile(file);
+        console.log("Выбранный файл:", file);
+    };
+
+    // Обработка отправки формы
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const metadata = `[
+            {
+                "flavor": "dublincore/episode",
+                "fields": [{
+                    "id": "title",
+                    "value": "${videoTitle}"
+                }]
+            }
+        ]`
+
+        const formData = new FormData();
+        formData.append("metadata", metadata);
+        formData.append("presenter", videoFile);
+        formData.append("processing", `{
+            "workflow": "lecture-process-with-includ",
+            "configuration": {
+                "flagForCutting": "false",
+                "flagForReview": "false",
+                "publishToEngage": "true",
+                "publishToHarvesting": "true",
+                "straightToPublishing": "true"
+            }
+        }`);
+        formData.append("acl",
+            `[{
+                "action": "write",
+                "role": "ROLE_ADMIN"
+            },
+                {
+                    "action": "read",
+                    "role": "ROLE_USER"
+                }]"`);
+        formData.append("workflow-id", "lecture-process-with-include");
+        const result = await uploadVideo(formData); // Отправляем данные
+        console.log(result);
+    };
+
+    return (
+        <form className="upload-form" onSubmit={handleSubmit}>
+            <div className="upload-content">
+                <Dropzone onFileSelect={handleFileSelect}/>
+                <div className="upload-content-preview">
+                    <div className="upload-content-preview-text">Добавить превью</div>
+                    <Dropzone/>
+                </div>
+            </div>
+            <div className="upload-info">
+                <input className="upload-info-title upload-info-element" placeholder='Введите название'/>
+                <textarea className="upload-info-description upload-info-element"
+                          placeholder='Введите описание'></textarea>
+                <div>
+                    <input type="checkbox" className="upload-info-checkbox upload-info-element"
+                           id="upload-video-checkbox"/>
+                    <label htmlFor="upload-video-checkbox">Удалить кадры без звука</label>
+                </div>
+                <label htmlFor="">Добавить в плейлист</label>
+                <select name="city" id="city-select" className="upload-info-element">
+                    <option value="" disabled selected>-- Выберите плейлист --</option>
+                    <option value="petersburg">плейлист 1</option>
+                    <option value="samara">плейлист 2</option>
+                    <option value="perm">плейлист 3</option>
+                    <option value="novosibirsk">плейлист 4</option>
+                </select>
+            </div>
+        </form>
+
+        // <form className="panel-control-content-form" onSubmit={handleSubmit}>
+
+        //     <div className="panel-control-content-settings">
+        //         <input type="text" name="title" id="videoTitle" placeholder="Введите название"
+        //                value={videoTitle}
+        //                onChange={(e) => setVideoTitle(e.target.value)}/>
+        //         <input type="checkbox" id="videoSilence"/>
+        //         <label htmlFor="videoSilence">Удалить кадры без звука</label>
+        //     </div>
+        //     <div className="panel-control-content-data">
+        //         <div className="panel-control-content-data-title">Данные видео</div>
+        //         <div className="panel-control-content-data-duration">Данные видео</div>
+        //         <div className="panel-control-content-data-size">Данные видео</div>
+        //     </div>
+        //     <div>
+        //         <label htmlFor={videoPlaylist}>Добавить в плейлист</label>
+        //         <select name="playlist" id="videoPlaylist"
+        //                 value={videoPlaylist}
+        //                 onChange={(e) => setVideoPlaylist(e.target.value)}>
+        //             <option value="" defaultValue>Выбрать плейлист</option>
+        //             {playlists.length === 0 ? (
+        //                 <option value=""></option>
+        //             ) : (
+        //                 playlists.map((playlist, index) =>
+        //                     <option key={index} value={playlist.identifier}>{playlist.title}</option>
+        //                 )
+        //             )}
+        //         </select>
+        //     </div>
+        //     <button className="panel-control-content-button">Загрузить</button>
+        // </form>
+    )
+}
+
+async function getPlaylists() {
+    const playlists = await HttpRequest.request(config.host + 'series');
+    console.log(playlists);
+    return playlists;
+}
+
+async function uploadVideo(body) {
+    const result = await HttpRequest.request(config.host + 'events', "POST", body);
+    return result;
+}

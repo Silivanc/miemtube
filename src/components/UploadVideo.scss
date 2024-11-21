@@ -1,0 +1,91 @@
+@import "./PanelControl.scss";
+
+.upload-form {
+  display: flex;
+  padding: 32px;
+
+  .upload-content {
+    max-width: 291px;
+    margin-right: 29px;
+
+    .upload-content-element {
+      width: 291px;
+      height: 162px;
+      background: #9D9D9C;
+      border-radius: 20px;
+      margin-bottom: 19px;
+      overflow: hidden;
+    }
+
+    .upload-content-preview {
+      .upload-content-preview-text {
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+  .upload-info {
+    display: flex;
+    flex-direction: column;
+    width: 492px;
+
+    .upload-info-element {
+      margin-bottom: 14px;
+      border: 3px solid #D9D9D9;
+      border-radius: 20px;
+      padding: 9px 18px;
+    }
+
+    .upload-info-title {
+      height: 40px;
+    }
+
+    .upload-info-description {
+      margin-top: -4px;
+      height: 112px;
+    }
+  }
+}
+
+.panel-control-content-form {
+  padding: 63px 67px 25px 67px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 333px);
+  grid-template-rows: repeat(2, 187px) repeat(auto-fit, 187px);
+  grid-gap: 50px 25px;
+  grid-auto-flow: row;
+
+  .panel-control-content-video {
+    background: var(--main-color);
+  }
+
+  .panel-control-content-settings {
+    grid-column: 2 / 4;
+
+    #videoTitle {
+      width: 100%;
+      border: var(--border);
+      border-radius: 40px;
+      font-size: 24px;
+      padding: 5px 26px;
+      margin-bottom: 24px;
+    }
+
+    #videoSilence {
+      width: 48px;
+      height: 48px;
+      border: var(--border)
+    }
+  }
+
+  .panel-control-content-button {
+    grid-row: 3 / 4;
+    padding: 0;
+    height: 62px;
+    border-radius: 31px;
+    background: var(--main-color);
+    margin-top: auto;
+  }
+}
