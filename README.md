@@ -1,8 +1,26 @@
-# React + Vite
+# MiemTube Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Описание
 
-Currently, two official plugins are available:
+Фронтенд для взаимодействия с системой хранения и записи видео.
+Для работы необходим React
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Деплой
+
+Чтобы развернуть приложение локально или на сервере, достаточно:
+
+1. Склонировать репозиторий
+
+    ```shell
+    git clone https://git.miem.hse.ru/miemtube/frontend.git
+    ```
+   
+2. В файле `config/config.js` указать необходимые переменные.
+
+3. Запустить `docker-compose.yml`. После запуска сервис будет доступен на порте *5173*
+
+   ```shell
+   docker-compose up -d --build
+   ```
+
+Примечания: для работы потребуется установить заранее docker.
