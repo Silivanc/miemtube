@@ -10,6 +10,6 @@ RUN npm install -g serve
 
 COPY . /usr/src/app
 RUN npm run build
-EXPOSE 5174
+EXPOSE 5173
 
-CMD ["serve", "-s", "./dist"]
+CMD ["serve", "-s", "./dist", "-l", "tcp://0.0.0.0:5173"]
