@@ -26,7 +26,8 @@ function App() {
         <BrowserRouter>
             <Navbar/>
             <Routes>
-                <Route path="*" element={<Stream/>}/>
+                <Route path="streams" element={<Playlists/>}/>
+                <Route path="stream" element={<Stream/>}/>
                 <Route path="playlists" element={<Playlists/>}/>
                 <Route path="upload/stream" element={<PanelControl/>}/>
                 <Route path="/:playlistId" element={<Playlist/>}/>

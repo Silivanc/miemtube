@@ -4,11 +4,57 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "./Playlists.scss"
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import Playlist from "./Playlist.jsx";
 export default function Playlists() {
 
     const [playlists, setPlaylists] = useState([]);
+    const location = useLocation();
+    const [mediaContent, setMediaContent] = useState({})
+
+    if (location.pathname === '/playlists') {
+        useEffect(() => {
+            Videos.getPlaylists()
+                .then(result => {
+                    let newMediaContent = {};
+                    if (mediaContent && mediaContent.name === 'Курсы') {
+                        newMediaContent = {
+                            ...mediaContent,
+                            mediaElements: result
+                        }
+                    } else {
+                        newMediaContent.name = 'Курсы';
+                        newMediaContent.mediaElements = result;
+                    }
+                    setMediaContent(newMediaContent);
+                })
+                .catch(error => {
+                    console.error("Error fetching playlists:", error);
+                });
+        }, []);
+    }
+
+    if (location.pathname === '/streams') {
+        useEffect(() => {
+            Videos.getStreams()
+                .then(result => {
+                    let newMediaContent = {};
+                    if (mediaContent && mediaContent.name === 'Трансляции') {
+                        newMediaContent = {
+                            ...mediaContent,
+                            mediaElements: result
+                        }
+                    } else {
+                        newMediaContent.name = 'Трансляции';
+                        newMediaContent.mediaElements = result;
+                    }
+                    setMediaContent(newMediaContent);
+                })
+                .catch(error => {
+                    console.error("Error fetching playlists:", error);
+                });
+        }, []);
+    }
 
     useEffect(() => {
         Videos.getPlaylists()
@@ -19,11 +65,11 @@ export default function Playlists() {
     }, []);
 
 
-    if (playlists) {
+    if (mediaContent) {
         return (
             <div className="playlists">
                 <div className="playlists-main">
-                    <div className="playlists-main-title">Курсы</div>
+                    <div className="playlists-main-title">{mediaContent.name}</div>
                 </div>
                 <div className="container">
                     <div className="playlists-search">
@@ -49,7 +95,7 @@ export default function Playlists() {
                                                     key={index}>
                                                     <div className="playlists-element">
                                                         <div className="playlists-element-image">
-                                                            <img src="" alt="Обложка плейлиста"/>
+                                                            <img src="../../public/static/images/name.png" alt="Обложка плейлиста"/>
                                                         </div>
                                                         <div className="playlists-element-info">
                                                             <div className="playlists-element-info-photo">

@@ -37,7 +37,7 @@ export default function Playlist(props) {
                         <div className="container">
                             <div className="playlist-info">
                                 <div className="playlist-info-preview">
-                                    <img src="" alt=""/>
+                                    <img src="../../public/static/images/name.png" alt=""/>
                                 </div>
                                 <div className="playlist-info-title">{playlist.title}</div>
                                 <div className="playlist-info-author">{playlist.creator}</div>

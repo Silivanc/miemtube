@@ -1,7 +1,6 @@
 import {Auth} from "./Auth.js";
-import config from "../config/config.js";
 
-export class HttpRequest {
+export class HttpStream {
     static async request(url, method = 'GET', body = null){
         const params = {
             method: method,
@@ -19,11 +18,9 @@ export class HttpRequest {
             }
         }
 
-        let token = localStorage.getItem(Auth.accessTokenKey);
+        let token = localStorage.getItem('accessTokenStream');
         if (token) {
             params.headers['Authorization'] = 'Bearer ' + token;
-        } else {
-            Auth.setToken();
         }
 
         if (body) {
@@ -31,29 +28,12 @@ export class HttpRequest {
         }
         const response = await fetch(url, params);
 
-        // if (response.status < 200 || response.status > 300) {
-        //     const result = await Auth.processUnauthorizedResponse();
-        //     if (response.status === 401) {
-        //         const result = await Auth.processUnauthorizedResponse();
-        //         if (result) {
-        //             return await this.request(url, method, body)
-        //         } else {
-        //             return null;
-        //         }
-        //     }
-        //
-        //     throw new Error(response.message);
-        // }
-
         if (response.status >= 200 && response.status < 300) {
             try {
                 const result = response.json();
                 return await result;
             } catch {
-                const tokenResult = Auth.setToken(false);
-                if (tokenResult) {
-                    HttpRequest.request(url, method, body);
-                }
+                throw new Error("Ошибка с токеном стрима");
             }
         }
 

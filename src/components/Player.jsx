@@ -39,8 +39,10 @@ export default function Player() {
         <div className="player">
             <div className="container">
                 <div className="player-main">
-                    <video className="player-main-video"
-                           src={video.url} controls autoPlay></video>
+                    <video className="player-main-video" controls autoPlay muted>
+                        <source src={video.url} type="video/mp4" />
+                        Ваш браузер не поддерживает данный формат видео.
+                    </video>
                     <div className="player-main-title">{video.videoInfo.title}</div>
                     <div className="player-main-info">
                         <div className="player-main-info-tutor">

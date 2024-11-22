@@ -1,5 +1,6 @@
 import config from "../config/config.js";
 import {HttpRequest} from "./Http.js";
+import {HttpStream} from "./HttpStream.js";
 
 export class Videos {
 
@@ -18,7 +19,7 @@ export class Videos {
     }
 
     static async getStreams() {
-        return await HttpRequest.request(config.streamHost + 'streams');
+        return await HttpStream.request(config.streamHost + 'plan');
     }
 
     static async getPlaylists() {

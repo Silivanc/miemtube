@@ -1,5 +1,6 @@
 export default {
     host: 'http://89.169.157.210/api/',
     hostToken: 'http://89.169.157.210/token/api/v0/debug_token',
-    streamHost: 'http://localhost:1984/api/'
+    streamsToken: 'http://localhost:8081/docs#/default/get_debug_token_api_v0_debug_token_get',
+    streamHost: 'http://localhost:8080/api/v1/'
 }

@@ -1,7 +1,6 @@
 import {Auth} from "./Auth.js";
-import config from "../config/config.js";
 
-export class HttpRequest {
+export class ContentRequest {
     static async request(url, method = 'GET', body = null){
         const params = {
             method: method,
@@ -31,23 +30,9 @@ export class HttpRequest {
         }
         const response = await fetch(url, params);
 
-        // if (response.status < 200 || response.status > 300) {
-        //     const result = await Auth.processUnauthorizedResponse();
-        //     if (response.status === 401) {
-        //         const result = await Auth.processUnauthorizedResponse();
-        //         if (result) {
-        //             return await this.request(url, method, body)
-        //         } else {
-        //             return null;
-        //         }
-        //     }
-        //
-        //     throw new Error(response.message);
-        // }
-
         if (response.status >= 200 && response.status < 300) {
             try {
-                const result = response.json();
+                const result = response.body.getReader();
                 return await result;
             } catch {
                 const tokenResult = Auth.setToken(false);
@@ -56,7 +41,6 @@ export class HttpRequest {
                 }
             }
         }
-
         return false;
     }
 }

@@ -107,10 +107,7 @@ export default function UploadVideo() {
                 <label htmlFor="">Добавить в плейлист</label>
                 <select name="city" id="city-select" className="upload-info-element">
                     <option value="" defaultValue>-- Не выбирать плейлист --</option>
-                    <option value="petersburg">плейлист 1</option>
-                    <option value="samara">плейлист 2</option>
-                    <option value="perm">плейлист 3</option>
-                    <option value="novosibirsk">плейлист 4</option>
+                    <option value="petersburg">Элитный плейлист</option>
                 </select>
             </div>
 
