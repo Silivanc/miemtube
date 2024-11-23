@@ -9,31 +9,23 @@ import Stream from "./components/Stream.jsx";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import PanelControl from "./components/PanelControl.jsx";
 import Playlists from "./components/Playlists.jsx";
+import {routes} from "../config/routes.js"
 
 
 function App() {
     const [count, setCount] = useState(0)
 
-    // return (
-    //   <>
-    //     <Navbar />
-    //     <Player />
-    //     {/*<Playlist playlistId = '936714ba-b7bc-4a2c-82ce-38f34a97f8d2' />*/}
-    //   </>
-    // )
-
     return (
         <BrowserRouter>
             <Navbar/>
             <Routes>
-                <Route path="streams" element={<Playlists/>}/>
-                <Route path="stream" element={<Stream/>}/>
-                <Route path="playlists" element={<Playlists/>}/>
-                <Route path="upload/stream" element={<PanelControl/>}/>
-                <Route path="/:playlistId" element={<Playlist/>}/>
-                <Route path="upload/video" element={<PanelControl/>}/>
+                <Route path={routes.playlists} element={<Playlists/>}/>
+                <Route path={routes.streams} element={<Playlists/>}/>
+                <Route path={routes.stream} element={<Stream/>}/>
+                <Route path={routes.uploadStream} element={<PanelControl/>}/>
+                <Route path={routes.playlist} element={<Playlist/>}/>
+                <Route path={routes.uploadVideo} element={<PanelControl/>}/>
                 <Route path="/:playlistId/:videoId" element={<Player/>}/>
-                <Route path="playlist" element={<Playlist playlistId="936714ba-b7bc-4a2c-82ce-38f34a97f8d2"/>}/>
             </Routes>
         </BrowserRouter>
     )

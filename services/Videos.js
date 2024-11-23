@@ -26,6 +26,14 @@ export class Videos {
         return await HttpRequest.request(config.host + 'series');
     }
 
+    static async getMediaContent(pathname) {
+        if (pathname === '/streams') {
+            return await HttpStream.request(config.streamHost + 'plan');
+        } else if (pathname === '/playlists') {
+            return await HttpRequest.request(config.host + 'series');
+        }
+    }
+
     static async getPlaylist(playlistId) {
         return await HttpRequest.request(config.host + 'series/' + playlistId);
     }

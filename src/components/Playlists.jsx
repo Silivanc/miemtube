@@ -6,55 +6,34 @@ import Col from 'react-bootstrap/Col';
 import "./Playlists.scss"
 import {Link, useLocation} from "react-router-dom";
 import Playlist from "./Playlist.jsx";
+
 export default function Playlists() {
 
     const [playlists, setPlaylists] = useState([]);
     const location = useLocation();
     const [mediaContent, setMediaContent] = useState({})
 
-    if (location.pathname === '/playlists') {
-        useEffect(() => {
-            Videos.getPlaylists()
-                .then(result => {
-                    let newMediaContent = {};
-                    if (mediaContent && mediaContent.name === 'Курсы') {
-                        newMediaContent = {
-                            ...mediaContent,
-                            mediaElements: result
-                        }
-                    } else {
-                        newMediaContent.name = 'Курсы';
-                        newMediaContent.mediaElements = result;
-                    }
-                    setMediaContent(newMediaContent);
-                })
-                .catch(error => {
-                    console.error("Error fetching playlists:", error);
-                });
-        }, []);
+    const updateMediaContent = (result, pathname) => {
+        let name;
+        if (pathname === '/playlists') {
+            name = 'Курсы';
+        } else if (pathname === '/streams') {
+            name = 'Трансляции';
+        }
+        let newMediaContent = {
+            name,
+            mediaElements: result,
+        };
+        setMediaContent(newMediaContent);
     }
 
-    if (location.pathname === '/streams') {
-        useEffect(() => {
-            Videos.getStreams()
-                .then(result => {
-                    let newMediaContent = {};
-                    if (mediaContent && mediaContent.name === 'Трансляции') {
-                        newMediaContent = {
-                            ...mediaContent,
-                            mediaElements: result
-                        }
-                    } else {
-                        newMediaContent.name = 'Трансляции';
-                        newMediaContent.mediaElements = result;
-                    }
-                    setMediaContent(newMediaContent);
-                })
-                .catch(error => {
-                    console.error("Error fetching playlists:", error);
-                });
-        }, []);
-    }
+    useEffect(() => {
+        Videos.getMediaContent(location.pathname)
+            .then(result => updateMediaContent(result, location.pathname))
+            .catch(error => {
+                console.error(`Error fetching ${location.pathname}: `, error);
+            });
+    }, []);
 
     useEffect(() => {
         Videos.getPlaylists()
@@ -81,13 +60,13 @@ export default function Playlists() {
                     </div>
                     <div className="playlists-list">
                         {playlists.length === 0 ? (
-                                <div>Плейлисты отсутсвуют</div>
+                                <div>{mediaContent.name} отсутсвуют</div>
                             ) :
                             (<Container>
                                 <Row>
                                     {playlists.map((playlist, index) => {
                                         return (
-                                            <Col xs={4}>
+                                            <Col xs={3}>
                                                 <Link
                                                     to={{
                                                         pathname: `/${playlist.identifier}`
@@ -95,7 +74,8 @@ export default function Playlists() {
                                                     key={index}>
                                                     <div className="playlists-element">
                                                         <div className="playlists-element-image">
-                                                            <img src="../../public/static/images/name.png" alt="Обложка плейлиста"/>
+                                                            <img src=""
+                                                                 alt="Обложка плейлиста"/>
                                                         </div>
                                                         <div className="playlists-element-info">
                                                             <div className="playlists-element-info-photo">

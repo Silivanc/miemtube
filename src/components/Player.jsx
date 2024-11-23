@@ -62,7 +62,7 @@ export default function Player() {
                                 <path
                                     d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80z"/>
                             </svg>
-                            <div className="player-main-info-views-number">1000000</div>
+                            <div className="player-main-info-views-number">{Math.floor(Math.random() * 1000)}</div>
                         </div>
                     </div>
                     <div className="player-main-course">Название курса: {video.videoInfo.subjects}</div>
