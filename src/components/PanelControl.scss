@@ -8,27 +8,6 @@
   min-height: 100vh;
   font-size: 16px;
 
-  button {
-    height: 82px;
-    border: 0;
-    cursor: pointer;
-    background: white;
-    padding-left: 34px;
-
-    &:hover {
-      background: var(--main-color);
-    }
-
-    svg {
-      height: 40px;
-      width: 40px;
-
-      path {
-        fill: dimgray;
-      }
-    }
-  }
-
   .panel-nav {
     display: flex;
     flex-shrink: 0;

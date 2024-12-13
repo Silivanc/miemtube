@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 export default function Navbar() {
     return (
         <nav>
-            <div className="tabs">
+            <div className="tabs bg-slat">
                 <div className="tabs-logo">
                     <img src="../../static/images/logo.png" alt="ВШЭ"/>
                 </div>

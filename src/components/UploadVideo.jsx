@@ -4,6 +4,10 @@ import React, {useState, useEffect} from 'react';
 import {HttpRequest} from "../../services/Http.js";
 import Dropzone from "./Dropzone.jsx";
 import {useMatch} from "react-router-dom";
+import clsx from "clsx";
+
+const uploadInfoElementStyles = "px-2 py-1 " +
+    "mb-3 border-[3px] border-solid border-[#D9D9D9] rounded-[20px]"
 
 export default function UploadVideo() {
 
@@ -40,79 +44,82 @@ export default function UploadVideo() {
         event.preventDefault();
 
         const metadata = `[
-  {
-    "flavor": "dublincore/episode",
-    "fields": [
-      {
-        "id": "title",
-        "value": ${videoTitle}
-      },
-      {
-        "id": "publisher",
-        "value": "Admin"
-      },
-    ]
-  }
-]`
+          {
+            "flavor": "dublincore/episode",
+            "fields": [
+              {
+                "id": "title",
+                "value": ${videoTitle}
+              },
+              {
+                "id": "publisher",
+                "value": "Admin"
+              },
+            ]
+          }
+        ]`
 
         const formData = new FormData();
         formData.append("metadata", metadata);
         formData.append("presenter", videoFile);
         formData.append("processing", `{
-  "workflow": "fast-testing-workflow",
-  "configuration": {
-    "flagForCutting": "false",
-    "flagForReview": "false",
-    "publishToEngage": "true",
-    "publishToHarvesting": "true",
-    "straightToPublishing": "true"
-  }
-}`);
-        formData.append("acl",
-            `[
-  {
-    "action": "write",
-    "role": "ROLE_ADMIN"
-  },
-  {
-    "action": "read",
-    "role": "ROLE_USER"
-  }
-]`);
+          "workflow": "fast-testing-workflow",
+          "configuration": {
+            "flagForCutting": "false",
+            "flagForReview": "false",
+            "publishToEngage": "true",
+            "publishToHarvesting": "true",
+            "straightToPublishing": "true"
+          }
+        }`);
+                formData.append("acl",
+                    `[
+          {
+            "action": "write",
+            "role": "ROLE_ADMIN"
+          },
+          {
+            "action": "read",
+            "role": "ROLE_USER"
+          }
+        ]`);
         // formData.append("workflow-id", "lecture-process-with-include");
         const result = await uploadVideo(formData); // Отправляем данные
         console.log(result);
     };
 
     return (
-        <form className="upload-form" onSubmit={handleSubmit}>
-            <div className="upload-content">
-                <Dropzone onFileSelect={handleFileSelect}/>
-                <div className="upload-content-preview">
-                    <div className="upload-content-preview-text">Добавить превью</div>
-                    <Dropzone/>
+        <>
+            <form className="upload-form flex flex-col" onSubmit={handleSubmit}>
+                <div className="flex">
+                    <div className="upload-content">
+                        <Dropzone onFileSelect={handleFileSelect}/>
+                        <div className="">
+                            <div className="font-semibold mb-4">Добавить превью</div>
+                            <Dropzone/>
+                        </div>
+                    </div>
+                    <div className="upload-info">
+                        <input className={clsx(uploadInfoElementStyles, "h-10 mb-4")} placeholder='Введите название'
+                               value={videoTitle}
+                               onChange={(e) => setVideoTitle(e.target.value)}/>
+                        <textarea className={clsx("h-28 -mt-1", uploadInfoElementStyles)}
+                                  placeholder='Введите описание'></textarea>
+                        <div>
+                            <input type="checkbox" className="upload-info-checkbox upload-info-element"
+                                   id="upload-video-checkbox"/>
+                            <label htmlFor="upload-video-checkbox">Удалить кадры без звука</label>
+                        </div>
+                        <label htmlFor="" className="mb-2">Добавить в плейлист</label>
+                        <select name="city" id="city-select" className="upload-info-element">
+                            <option value="" defaultValue>-- Не выбирать плейлист --</option>
+                            <option value="petersburg">Элитный плейлист</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div className="upload-info">
-                <input className="upload-info-title upload-info-element" placeholder='Введите название'
-                value={videoTitle}
-                onChange={(e) => setVideoTitle(e.target.value)}/>
-                <textarea className="upload-info-description upload-info-element"
-                          placeholder='Введите описание'></textarea>
-                <div>
-                    <input type="checkbox" className="upload-info-checkbox upload-info-element"
-                           id="upload-video-checkbox"/>
-                    <label htmlFor="upload-video-checkbox">Удалить кадры без звука</label>
-                </div>
-                <label htmlFor="">Добавить в плейлист</label>
-                <select name="city" id="city-select" className="upload-info-element">
-                    <option value="" defaultValue>-- Не выбирать плейлист --</option>
-                    <option value="petersburg">Элитный плейлист</option>
-                </select>
-            </div>
-
-            <button className="upload-button">Отправить</button>
-        </form>
+                <button className="w-[291px] h-[62px] text-white rounded-full bg-[#244A9A] ">Отправить</button>
+            </form>
+        </>
 
         // <form className="panel-control-content-form" onSubmit={handleSubmit}>
 

@@ -56,7 +56,7 @@ export default function Playlists() {
                                placeholder="Направление"/>
                         <input type="text" className="playlists-search-title playlists-search-element"
                                placeholder="Название"/>
-                        <button className="playlists-sesrch-button playlists-search-element">Найти</button>
+                        <button className="playlists-search-button playlists-search-element">Найти</button>
                     </div>
                     <div className="playlists-list">
                         {playlists.length === 0 ? (

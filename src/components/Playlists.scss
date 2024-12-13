@@ -31,7 +31,6 @@
   .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
 
     .playlists-search {
       display: flex;
@@ -39,7 +38,7 @@
       align-items: center;
       width: 76%;
       height: 30px;
-      margin-bottom: 25px;
+      margin: 0 auto 25px auto;
 
       .playlists-search-element {
         padding: 4px 15px;
@@ -64,7 +63,7 @@
         width: 597px;
       }
 
-      .playlists-sesrch-button {
+      .playlists-search-button {
         width: 336px;
         color: #fff;
         background: #112D69;

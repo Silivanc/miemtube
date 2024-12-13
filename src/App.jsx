@@ -1,7 +1,6 @@
 import {useState} from 'react'
 import './App.scss'
 import './components/Navbar.scss'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import Navbar from "./components/Header.jsx";
 import Player from "./components/Player.jsx";
 import Playlist from "./components/Playlist.jsx";
@@ -10,6 +9,9 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import PanelControl from "./components/PanelControl.jsx";
 import Playlists from "./components/Playlists.jsx";
 import {routes} from "../config/routes.js"
+import ContentLayout from "./pages/ContentLayout.jsx";
+import Playlists2 from "./components/Playlists2.jsx";
+import {Footer} from "./components/footer";
 
 
 function App() {
@@ -19,14 +21,17 @@ function App() {
         <BrowserRouter>
             <Navbar/>
             <Routes>
-                <Route path={routes.playlists} element={<Playlists/>}/>
+                <Route path="/" element={<ContentLayout/>}/>
+                <Route path={routes.playlists} element={<Playlists2/>}/>
                 <Route path={routes.streams} element={<Playlists/>}/>
                 <Route path={routes.stream} element={<Stream/>}/>
                 <Route path={routes.uploadStream} element={<PanelControl/>}/>
                 <Route path={routes.playlist} element={<Playlist/>}/>
+                <Route path={routes.uploadedVideo} element={<Playlist/>}/>
                 <Route path={routes.uploadVideo} element={<PanelControl/>}/>
                 <Route path="/:playlistId/:videoId" element={<Player/>}/>
             </Routes>
+            <Footer/>
         </BrowserRouter>
     )
 
