@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",           // Указывает корень проекта
+    "paths": {
+      "@/*": ["src/*"]        // Настройте алиасы, если используются
+    },
+    "module": "esnext",        // Указывает формат модуля ES
+    "moduleResolution": "node" // Для работы с модулями Node.js
+  },
+  "include": ["src/**/*"],    // Включите все файлы из папки `src`
+  "exclude": ["node_modules"] // Исключите папку `node_modules`
+}

@@ -1,35 +1,51 @@
 import {Link} from "react-router-dom";
-import { routes } from "../../config/routes";
+import { routes } from "../../../config/routes";
+import { clsx } from "clsx";
+import { useEffect, useState } from "react";
+import { Auth } from "../../../services/Auth";
 
-export default function Navbar() {
+export function Navbar() {
+    const [isAuth, setIsAuth] = useState(false);
+
+    useEffect(() => {
+        Auth.checkMe().then(setIsAuth).catch(
+            error => console.log(error)
+        )
+    })
+
+    const exit = (e) => {
+        e.preventDefault();
+        localStorage.clear();
+        setIsAuth(false);
+    }
+
     return (
-        <nav>
-            <div className="tabs bg-slat">
-                <div className="tabs-logo">
+        <nav className="sticky top-0 py-[21px] px-[38px] text-white text-base leading-tight flex items-center justify-between bg-[#112D69] shadow-md z-50 w-full">
+            <div className="flex items-center">
+                <div className="mr-9">
                     <img src="static/images/logo.png" alt="ВШЭ"/>
                 </div>
-                <div className="tabs-points">
+                <div className="flex">
                     <Link
+                        className="mr-4"
                         to={{
                             pathname: `playlists`
                         }}
                     >Курсы</Link>
-                    <div className="tabs-point">
                     <Link
                         to={{
                             pathname: `streams`
                         }}
                     >Трансляции</Link>
-                    </div>
                 </div>
             </div>
             <div className="sign relative inline-block text-left">
-                {/* <Link
+                {!isAuth ? <Link
                     to={{
                         pathname: `login`
                     }}
-                >Войти</Link> */}
-                    <div className="relative group">
+                >Войти</Link> :
+                <div className="relative group">
                         <button
                             type="button"
                             className="inline-flex justify-center items-center w-full px-4 py-2 text-sm font-medium text-white bg-transparent focus:outline-none"
@@ -78,13 +94,13 @@ export default function Navbar() {
                             <Link
                                 to="#"
                                 className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                                onClick={exit}
                             >
                                 Выйти
                             </Link>
                             </div>
                         </div>
-                    </div>
-
+                    </div>}
             </div>
         </nav>
     )

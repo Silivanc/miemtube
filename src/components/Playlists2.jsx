@@ -11,8 +11,8 @@ export default function Playlists2() {
     const [mediaContent, setMediaContent] = useState({})
 
     const updateMediaContent = (result, pathname) => {
-        let name;
-        if (pathname === '/playlists') {
+        let name = "Курсы";
+        if (pathname === '/playlists')  {
             name = 'Курсы';
         } else if (pathname === '/streams') {
             name = 'Трансляции';

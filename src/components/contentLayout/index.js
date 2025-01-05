@@ -1,1 +1,1 @@
-export {Banner} from "./banner.jsx"
+export {Headline} from "./Headline.jsx"         

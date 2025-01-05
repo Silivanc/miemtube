@@ -1,8 +1,6 @@
 import Dropzone from "./Dropzone.jsx";
 import React, {useState} from "react";
 import './UploadVideo.scss'
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 export default function UploadStream() {
 

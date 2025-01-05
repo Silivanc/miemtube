@@ -2,9 +2,6 @@ import {HttpRequest} from "../../services/Http.js";
 import {Videos} from "../../services/Videos.js";
 import config from "../../config/config.js";
 import {Link, useParams} from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import "./Playlist.scss";
 
 import React, {useState, useEffect} from 'react';

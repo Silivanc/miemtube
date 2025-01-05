@@ -2,13 +2,12 @@ import {Auth} from "./Auth.js";
 import config from "../config/config.js";
 
 export class HttpRequest {
-    static async request(url, method = 'GET', body = null){
+    static async request(url, method = 'GET', body = null, requireToken = false){
         const params = {
             method: method,
         }
 
         if (body instanceof FormData) {
-
             params.headers = {
                 'Accept': 'application/json', //получение
             }
@@ -19,11 +18,15 @@ export class HttpRequest {
             }
         }
 
-        let token = localStorage.getItem(Auth.accessTokenKey);
-        if (token) {
-            params.headers['Authorization'] = 'Bearer ' + token;
-        } else {
-            Auth.setToken();
+        let token;
+        if (requireToken) {
+            token = localStorage.getItem(Auth.accessTokenKey);
+
+            if (token) {
+                params.headers['Authorization'] = 'Bearer ' + token;
+            } else {
+                Auth.setToken();
+            }
         }
 
         if (body) {
@@ -50,9 +53,11 @@ export class HttpRequest {
                 const result = response.json();
                 return await result;
             } catch {
-                const tokenResult = Auth.setToken(false);
-                if (tokenResult) {
-                    HttpRequest.request(url, method, body);
+                if (requireToken) {
+                    const tokenResult = Auth.setToken(false);
+                    if (tokenResult) {
+                        HttpRequest.request(url, method, body, requireToken);
+                    }
                 }
             }
         }
