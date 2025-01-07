@@ -1,0 +1,51 @@
+import { useEffect, useState } from "react";
+import { Videos } from "../../../../services/Videos.js";
+import { MediaItem } from "./mediaItem.jsx";
+
+export function MediaItems({ type, amount = -1 }) {
+  const [mediaItems, setMediaItems] = useState([]);
+
+  useEffect(() => {
+    if (type === "playlists") {
+      Videos.getPlaylists(amount)
+        .then(setMediaItems)
+        .catch((error) => {
+          console.error("Error fetching playlists:", error);
+        });
+    }
+
+    if (type === "videos") {
+      Videos.getVideos()
+        .then(setMediaItems)
+        .catch((error) => {
+          console.error("Error fetching playlists:", error);
+        });
+    }
+
+    if (type === "streams") {
+      Videos.getStreams()
+        .then(setMediaItems)
+        .catch((error) => {
+          console.error("Error fetching playlists:", error);
+        });
+    }
+  });
+
+  if (type==="videos") {
+    console.log(mediaItems)
+  }
+
+  return (
+    <>
+      {mediaItems.length === 0 ? (
+        <div>Данные отсуствуют</div>
+      ) : (
+        <div className="grid grid-cols-4 justify-items-center">
+          {mediaItems.map((item, index) => {
+            return <MediaItem item={item} key={index}></MediaItem>;
+          })}
+        </div>
+      )}
+    </>
+  );
+}

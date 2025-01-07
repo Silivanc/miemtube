@@ -39,7 +39,7 @@ export default function Player() {
         <div className="player">
             <div className="container">
                 <div className="player-main">
-                    <video className="player-main-video" controls autoPlay muted>
+                    <video className="player-main-video" controls autoPlay muted key={videoId}>
                         <source src={video.url} type="video/mp4" />
                         Ваш браузер не поддерживает данный формат видео.
                     </video>

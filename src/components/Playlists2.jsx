@@ -57,7 +57,7 @@ export default function Playlists2() {
                     </div>
                     <div className="playlists-list">
                         {playlists.length === 0 ? (
-                                <div>{mediaContent.name} отсутсвуют</div>
+                                <div>{mediaContent.name} отсутствуют</div>
                             ) :
                             <div className="grid grid-cols-4">
                                 {playlists.map((playlist, index) => {
@@ -89,118 +89,6 @@ export default function Playlists2() {
                                 })}
                             </div>
                         }
-                        <div className="grid grid-cols-4 ">
-                            <Link
-                                to={{
-                                    pathname: `/`
-                                }}>
-                                <div className="playlists-element">
-                                    <div className="playlists-element-image">
-                                        <img src=""
-                                             alt="Обложка плейлиста"/>
-                                    </div>
-                                    <div className="playlists-element-info">
-                                        <div className="playlists-element-info-photo">
-                                            <img src="" alt="Фото преподавателя"/>
-                                        </div>
-                                        <div className="playlists-element-info-text">
-                                            <div
-                                                className="playlists-element-info-title">Название</div>
-                                            <div
-                                                className="playlists-element-info-author">Автор</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-                            <Link
-                                to={{
-                                    pathname: `/`
-                                }}>
-                                <div className="playlists-element">
-                                    <div className="playlists-element-image">
-                                        <img src=""
-                                             alt="Обложка плейлиста"/>
-                                    </div>
-                                    <div className="playlists-element-info">
-                                        <div className="playlists-element-info-photo">
-                                            <img src="" alt="Фото преподавателя"/>
-                                        </div>
-                                        <div className="playlists-element-info-text">
-                                            <div
-                                                className="playlists-element-info-title">Название</div>
-                                            <div
-                                                className="playlists-element-info-author">Автор</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-                            <Link
-                                to={{
-                                    pathname: `/`
-                                }}>
-                                <div className="playlists-element">
-                                    <div className="playlists-element-image">
-                                        <img src=""
-                                             alt="Обложка плейлиста"/>
-                                    </div>
-                                    <div className="playlists-element-info">
-                                        <div className="playlists-element-info-photo">
-                                            <img src="" alt="Фото преподавателя"/>
-                                        </div>
-                                        <div className="playlists-element-info-text">
-                                            <div
-                                                className="playlists-element-info-title">Название</div>
-                                            <div
-                                                className="playlists-element-info-author">Автор</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-                            <Link
-                                to={{
-                                    pathname: `/`
-                                }}>
-                                <div className="playlists-element">
-                                    <div className="playlists-element-image">
-                                        <img src=""
-                                             alt="Обложка плейлиста"/>
-                                    </div>
-                                    <div className="playlists-element-info">
-                                        <div className="playlists-element-info-photo">
-                                            <img src="" alt="Фото преподавателя"/>
-                                        </div>
-                                        <div className="playlists-element-info-text">
-                                            <div
-                                                className="playlists-element-info-title">Название</div>
-                                            <div
-                                                className="playlists-element-info-author">Автор</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-                            <Link
-                                to={{
-                                    pathname: `/`
-                                }}>
-                                <div className="playlists-element">
-                                    <div className="playlists-element-image">
-                                        <img src=""
-                                             alt="Обложка плейлиста"/>
-                                    </div>
-                                    <div className="playlists-element-info">
-                                        <div className="playlists-element-info-photo">
-                                            <img src="" alt="Фото преподавателя"/>
-                                        </div>
-                                        <div className="playlists-element-info-text">
-                                            <div
-                                                className="playlists-element-info-title">Название</div>
-                                            <div
-                                                className="playlists-element-info-author">Автор</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </div>

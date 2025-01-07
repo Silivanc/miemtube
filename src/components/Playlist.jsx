@@ -43,41 +43,42 @@ export default function Playlist(props) {
 
                             <div className="playlist-content">
                                 <h1 className="playlist-content-title">Видео</h1>
-                                <Container fluid>
-                                    <Row className="playlist-content-params">
-                                        <Col xs={{span: 4, offset: 3}}>Название</Col>
-                                        <Col xs={2}>Размер</Col>
-                                        <Col xs={2}>Дата изменения</Col>
-                                    </Row>
+                                <div className="">
+                                    <div className="grid grid-cols-4 p-[14px] border-t-2 border-b-2">
+                                        <div></div>
+                                        <div>Название</div>
+                                        <div>Размер</div>
+                                        <div>Дата изменения</div>
+                                    </div>
                                     {videos.map((video, index) => (
                                         <Link
                                             to={{
                                                 pathname: `/${playlistId}/${video.identifier}`
                                             }}
                                             key={index}>
-                                            <Row className="playlist-content-video">
-                                                <Col xs={3}>
-                                                    <img className="playlist-content-video-preview"
+                                            <div className="playlist-content-video grid grid-cols-4 py-[6px] px-0">
+                                                <div>
+                                                    <img className="playlist-content-video-preview w-[204px] h-[113px]"
                                                          src={video.preview} alt="Видео"/>
-                                                </Col>
-                                                <Col xs={4}>
+                                                </div>
+                                                <div>
                                                     <div
-                                                        className="playlist-content-video-title">{video.title}</div>
+                                                        className="playlist-content-video-title font-semibold">{video.title}</div>
                                                     <div className="playlist-content-video-tutor">Имя
                                                         преподавателя
                                                     </div>
-                                                </Col>
-                                                <Col xs={2}>
+                                                </div>
+                                                <div>
                                                     <div className="playlist-content-video-size">{video.size} МБ</div>
-                                                </Col>
-                                                <Col xs={2}>
+                                                </div>
+                                                <div>
                                                     <div
                                                         className="playlist-content-video-data">{video.start.split('T')[0]}</div>
-                                                </Col>
-                                            </Row>
+                                                </div>
+                                            </div>
                                         </Link>
                                     ))}
-                                </Container>
+                                </div>
                             </div>
                         </div>
                     </>

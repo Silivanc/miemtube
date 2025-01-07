@@ -7,9 +7,11 @@ export class Videos {
     static async getVideosFromPlaylist(playlistId) {
         const videos = await HttpRequest.request(config.host + 'events?filter=series:' + playlistId
             + ',status:EVENTS.EVENTS.STATUS.PROCESSED');
+            console.log(videos);    
         return await Promise.all(
             videos.map(async video => {
-                const publications = await HttpRequest.request(config.host + 'events/' + video.identifier + '/publications');
+                const publications = await HttpRequest.request(config.host + 'events/' + video.identifier + '/publications', 'GET', null, true);
+                console.log(publications);
                 const previewUrl = publications[0]['attachments']
                     .find(attachment => attachment['flavor'] === 'presenter/player+preview')['url'];
                 const videoSize = (publications[0]['media'][0]['size'] / 1024 / 1024).toFixed(2);
@@ -22,8 +24,12 @@ export class Videos {
         return await HttpStream.request(config.streamHost + 'plan');
     }
 
-    static async getPlaylists() {
-        return await HttpRequest.request(config.host + 'series');
+    static async getVideos(limit = "") {
+        return await HttpStream.request(config.host + 'events?limit=' + limit);
+    }
+
+    static async getPlaylists(limit = "") {
+        return await HttpRequest.request(config.host + 'series?limit=' + limit);
     }
 
     static async getMediaContent(pathname) {
@@ -40,7 +46,7 @@ export class Videos {
 
     static async getVideo(id) {
         const video = await HttpRequest.request(config.host + 'events/' + id);
-        const url = await HttpRequest.request(config.host + 'events/' + id + '/publications');
+        const url = await HttpRequest.request(config.host + 'events/' + id + '/publications', 'GET', null, true);
 
         return {
             videoInfo: video,

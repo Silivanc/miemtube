@@ -85,7 +85,7 @@ export function Login() {
                     Войти
                   </button>
                 </div>
-                <div className={clsx(isCorrect ? "hidden" : "relative text-red-600")}>
+                <div className={clsx(isCorrect ? "hidden " : "relative text-red-600 ", "text-sm")}>
                   Неправильный логин или пароль
                 </div>
               </div>

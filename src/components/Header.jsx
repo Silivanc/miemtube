@@ -32,7 +32,7 @@ export default function Navbar() {
                     <div className="relative group">
                         <button
                             type="button"
-                            className="inline-flex justify-center items-center w-full px-4 py-2 text-sm font-medium text-white bg-transparent focus:outline-none"
+                            className="inline-flex justify-center items-center w-full px-4 py-2 font-medium text-white bg-transparent focus:outline-none"
                         >
                             Личный кабинет
                             {/* Dropdown arrow */}
