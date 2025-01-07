@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Auth } from '../../../../services/Auth';
+import editIcon from '../../../assets/images/edit.svg';
+import trashIcon from '../../../assets/images/trash.svg';
 
 export function Personal() {
     const [users, setUsers] = useState([]); // начальное состояние - пустой массив
@@ -31,15 +33,15 @@ export function Personal() {
                                 <td className="p-4 border-b border-gray-200">{user.name}</td>
                                 <td className="p-4 border-b border-gray-200">{user.email}</td>
                                 <td className="p-4 border-b border-gray-200">
-                                    <button
-                                        className="w-6 h- bg-no-repeat bg-center bg-contain cursor-pointer"
-                                        style={{ backgroundImage: "url('edit.svg')" }}
-                                    />
-                                    <button
-                                        className="w-6 h-6 bg-no-repeat bg-center bg-contain cursor-pointer"
-                                        style={{ backgroundImage: "url('trash.svg')" }}
-                                    />
-                                </td>
+                                <div className="flex items-center gap-2">
+                                    <button className="w-6 h-6 flex items-center justify-center">
+                                        <img src={editIcon} alt="Редактировать" className="w-6 h-6" />
+                                    </button>
+                                    <button className="w-6 h-6 flex items-center justify-center">
+                                        <img src={trashIcon} alt="Удалить" className="w-6 h-6" />   
+                                    </button>
+                                </div>
+                            </td>
                             </tr>
                         ))
                     ) : (
