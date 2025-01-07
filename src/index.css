@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @font-face {
-    src: url("../public/static/fonts/hse-sans-regular.otf");
+    src: url("../static/fonts/hse-sans-regular.otf");
     font-family: "HSEsans";
 }
 
