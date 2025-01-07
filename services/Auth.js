@@ -100,6 +100,26 @@ export class Auth {
     return false;
   }
 
+  static async getUsers() {
+    const token = localStorage.getItem(this.accessTokenKey);
+    if (token) {
+      const response = await fetch(config.auth + '?limit=10&offset=0', {
+        method: "GET",
+        headers: {
+            "Authorization": 'Bearer ' + token
+        }
+      });
+
+      if (response) {
+        if (response.status >= 200 && response.status < 300) {
+          return response.json();
+        }
+      }
+
+      return false;
+    }
+  }
+
   // static setToken(accessToken) {
   //     localStorage.setItem(this.accessTokenKey, accessToken);
   // }

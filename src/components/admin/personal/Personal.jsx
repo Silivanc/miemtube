@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Personal.scss';
+import { Auth } from '../../../../services/Auth';
 
 export function Personal() {
+    const [users, setUsers] = useState();
+    
+        useEffect(() => {
+            Auth.getUsers()
+                .then(setUsers)
+                .catch(error =>
+                    console.error("Error fetching video:", error))
+        }, [])
+
+    console.log(users);
     return (
         <div>
             <table>
