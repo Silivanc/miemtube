@@ -19,9 +19,11 @@ export default function Player() {
     }, [videoId])
 
     useEffect(() => {
-        Videos.getVideosFromPlaylist(playlistId).then(setVideos).catch(error =>
-            console.error("Error fetching video list:", error)
-        );
+        if (playlistId === 'playlists') {
+            Videos.getVideosFromPlaylist(playlistId).then(setVideos).catch(error =>
+                console.error("Error fetching video list:", error)
+            );
+        }
     }, [playlistId]);
 
     // Если данные ещё загружаются, выводим сообщение
@@ -73,21 +75,25 @@ export default function Player() {
                     </div>
                 </div>
                 <div className="player-recommend">
+                    {playlistId === 'playlists' && videos && videos.length > 0 ? 
+                    <>
                     <div className="player-recommend-next">
-                        {videos[videoIndex + 1] ?
-                            <>
-                                <div className="player-recommend-next-text">Следующее видео в плейлисте</div>
-                                <RecommendVideo video={videos[videoIndex + 1]} playlistId={playlistId}/>
-                            </> : false}
-                    </div>
-                    <div className="player-recommend-videos">
-                        <div className="player-recommend-videos-text">Другие видео в плейлисте</div>
-                        {videos.length > 1 ? videos.map((video, index) => {
-                            if (index !== videoIndex) {
-                                return <RecommendVideo video={videos[index]} playlistId={playlistId}/>
-                            }
-                        }) : false}
-                    </div>
+                    {videos[videoIndex + 1] ?
+                        <>
+                            <div className="player-recommend-next-text">Следующее видео в плейлисте</div>
+                            <RecommendVideo video={videos[videoIndex + 1]} playlistId={playlistId}/>
+                        </> : false}
+                </div>
+                <div className="player-recommend-videos">
+                    <div className="player-recommend-videos-text">Другие видео в плейлисте</div>
+                    {videos.length > 1 ? videos.map((video, index) => {
+                        if (index !== videoIndex) {
+                            return <RecommendVideo video={videos[index]} playlistId={playlistId}/>
+                        }
+                    }) : false}
+                </div> 
+                    </> :
+                <div></div>}
                 </div>
             </div>
         </div>

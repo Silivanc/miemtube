@@ -37,6 +37,7 @@ function App() {
             <Route path={routes.streams} element={<Playlists />} />
             <Route path={routes.stream} element={<Stream />} />
             <Route path="/:playlistId/:videoId" element={<Player />} />
+            <Route path="/playlists/:videoId" element={<Player />} />
 
             <Route path={routes.login} element={<Login />} />
             <Route path={routes.admin} element={<Admin />} />

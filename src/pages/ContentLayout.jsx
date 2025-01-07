@@ -1,10 +1,7 @@
-import {useLocation} from "react-router-dom";
-import {useState} from "react";
 import { Headline } from "../components/contentLayout/Headline";
 import { MediaItems } from "@/components/contentLayout/media/mediaItems";
 
 export default function ContentLayout() {
-    const location = useLocation();
 
     return (
         <div>

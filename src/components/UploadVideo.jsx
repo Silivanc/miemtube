@@ -162,6 +162,7 @@ async function getPlaylists() {
 }
 
 async function uploadVideo(body) {
-    const result = await HttpRequest.request(config.host + 'events', "POST", body);
+    const result = await HttpRequest.request(config.host + 'events', "POST", body, true);
+    console.log(1);
     return result;
 }

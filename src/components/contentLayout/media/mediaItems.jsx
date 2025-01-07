@@ -31,10 +31,6 @@ export function MediaItems({ type, amount = -1 }) {
     }
   });
 
-  if (type==="videos") {
-    console.log(mediaItems)
-  }
-
   return (
     <>
       {mediaItems.length === 0 ? (
@@ -42,7 +38,7 @@ export function MediaItems({ type, amount = -1 }) {
       ) : (
         <div className="grid grid-cols-4 justify-items-center">
           {mediaItems.map((item, index) => {
-            return <MediaItem item={item} key={index}></MediaItem>;
+            return <MediaItem item={item} type={type} key={index}></MediaItem>;
           })}
         </div>
       )}
