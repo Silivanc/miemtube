@@ -29,7 +29,7 @@ export function MediaItems({ type, amount = -1 }) {
           console.error("Error fetching playlists:", error);
         });
     }
-  });
+  }, [type, amount]);
 
   return (
     <>
