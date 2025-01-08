@@ -13,14 +13,14 @@ function Stream() {
         //     {error ? (
         //         <p style={{ color: 'red' }}>Ошибка: {error}</p>
         //     ) : (
-        //         // <video src="http://localhost:1984/api/stream.mjpeg?src=str" controls style={{ width: '100%', maxWidth: '600px' }} />
+        //         // <video src="http://localhost:1984/api/stream.m3u8?src=str" controls style={{ width: '100%', maxWidth: '600px' }} />
         //
         //         )}
         // </div>
         <div className="player">
             <div className="container">
                 <div className="player-main">
-                    <video className="player-main-video" src="http://localhost:80/api/stream.mp4?src=cf02d97c-aee1-40aa-8564-4efa80d6bbc5" controls autoPlay muted>
+                    <video className="player-main-video" src="http://172.18.130.56:8095/api/stream.m3u8?src=0fac7057-0af7-42d7-9df3-cd94b67a8e92" controls autoPlay muted>
                     </video>
                     <div className="player-main-info">
                         <div className="player-main-info-tutor">
