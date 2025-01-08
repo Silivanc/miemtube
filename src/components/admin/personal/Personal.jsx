@@ -17,23 +17,21 @@ export function Personal() {
     }, []); // useEffect с пустым массивом зависимостей, запускается только один раз
 
     return (
-        <div className="p-0"> {/* Отступы вокруг таблицы */}
-            <table className="w-full border-none border-collapse border border-gray-300">
-                <thead>
-                    <tr>
-                        <th className="p-4 border-b-2 border-gray-300 text-left">Имя</th>
-                        <th className="p-4 border-b-2 border-gray-300 text-left">Почта</th>
-                        <th className="p-4 border-b-2 border-gray-300 text-left">Действия</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.length > 0 ? (
-                        users.map((user, index) => (
-                            <tr key={index} className="hover:bg-gray-50">
-                                <td className="p-4 border-b border-gray-200">{user.name}</td>
-                                <td className="p-4 border-b border-gray-200">{user.email}</td>
-                                <td className="p-4 border-b border-gray-200">
-                                <div className="flex items-center gap-2">
+        <div className="p-0 w-full">
+            <div className="grid grid-cols-3 gap-4 items-center bg-gray-100 font-medium text-left p-4 border-none border-gray-300">
+                <span>Имя</span>
+                <span>Почта</span>
+                <span>Действия</span>
+            </div>
+            {users.length > 0 ? (
+                users.map((user, index) => (
+                    <div
+                        key={index}
+                        className="grid grid-cols-3 gap-4 items-center border-b border-gray-200 p-4 hover:bg-gray-50"
+                    >
+                        <span>{user.name}</span>
+                        <span>{user.email}</span>
+                        <div className="flex items-center gap-2">
                                     <button className="w-6 h-6 flex items-center justify-center">
                                         <img src={editIcon} alt="Редактировать" className="w-6 h-6" />
                                     </button>
@@ -41,16 +39,11 @@ export function Personal() {
                                         <img src={trashIcon} alt="Удалить" className="w-6 h-6" />   
                                     </button>
                                 </div>
-                            </td>
-                            </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan="3" className="p-3 text-center">Загрузка...</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+                    </div>
+                ))
+            ) : (
+                <div className="p-4 text-center">Загрузка...</div>
+            )}
         </div>
     );
 }
