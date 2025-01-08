@@ -11,7 +11,7 @@ const uploadInfoElementStyles =
   "px-2 py-1 " +
   "mb-3 border-[3px] border-solid border-[#D9D9D9] rounded-[20px]";
 
-export default function UploadVideo() {
+export function UploadVideo() {
   const [playlists, setPlaylists] = useState([]);
   const [videoFile, setVideoFile] = useState("");
   const [videoTitle, setVideoTitle] = useState("");
@@ -65,8 +65,11 @@ export default function UploadVideo() {
     });
   
     const acl = JSON.stringify([
+      { action: "read", role: "ROLE_ADMIN" },
       { action: "write", role: "ROLE_ADMIN" },
       { action: "read", role: "ROLE_USER" },
+      { action: "read", role: "ROLE_ANONYMOUS" },
+      { action: "read", role: "ROLE_JWT_REDACTOR_ADMIN" },
       { action: "write", role: "ROLE_JWT_REDACTOR_ADMIN" },
     ]);
   

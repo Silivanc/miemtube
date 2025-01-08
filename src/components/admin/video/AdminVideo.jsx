@@ -1,10 +1,7 @@
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import UploadVideo from './UploadVideo';
-
-// Пример компонентов, которые будут переключаться
-const Component1 = () => <div>Загруженные видео</div>;
-const Component2 = () => <div>Загрузить видео</div>;
+import { UploadVideo } from './UploadVideo';
+import { UploadedVideo } from './UploadedVideo';
 
 export function AdminVideo() {
     const [activeIndex, setActiveIndex] = useState(0);  // Состояние для отслеживания активной вкладки
@@ -15,12 +12,12 @@ export function AdminVideo() {
             <Sections activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
 
             {/* Условный рендеринг компонента в зависимости от активной вкладки */}
-            {activeIndex === 0 ? <Component1 /> : <UploadVideo/>}
+            {activeIndex === 0 ? <UploadedVideo isAdmin={true}/> : <UploadVideo/>}
         </div>
     );
 }
 
-function Sections({activeIndex, setActiveIndex }) {
+function Sections({activeIndex, setActiveIndex}) {
     const tabs = ["Загруженные видео", "Загрузить видео"];
 
     return (
