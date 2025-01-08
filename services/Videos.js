@@ -1,6 +1,7 @@
 import config from "../config/config.js";
 import {HttpRequest} from "./Http.js";
 import {HttpStream} from "./HttpStream.js";
+import { convertMillsToSeconds } from "../utils/convertMillsToSeconds.js"
 
 export class Videos {
 
@@ -26,6 +27,18 @@ export class Videos {
 
     static async getVideos(limit = "") {
         return await HttpStream.request(config.host + 'events?limit=' + limit);
+    }
+
+    static async getVideosWithDuration(limit = "") {
+        const videos = await HttpStream.request(config.host + 'events?limit=' + limit);
+        return await Promise.all(
+            videos.map(async video => {
+                const publications = await HttpRequest.request(config.host + 'events/' + video.identifier + '/publications', 'GET', null, true);
+                console.log(publications);
+                const duration = convertMillsToSeconds(publications[0]['media'][0]['duration']);
+                return {...video, duration: duration}
+            })
+        );
     }
 
     static async getPlaylists(limit = "") {
