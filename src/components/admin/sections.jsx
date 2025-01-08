@@ -15,9 +15,9 @@ export function Sections({ type }) {
       {tabs.map((tab, index) => (
         <div
           key={index}
-          onClick={() => setActiveIndex(index)}
+          onClick={() => setActiveIndex(index)} // При клике обновляем активную вкладку
           className={clsx(
-            activeIndex === index ? "bg-[#D9D9D9]" : "",
+            index === activeIndex ? "bg-[#D9D9D9]" : "", // Изначально первая вкладка выделена
             "h-14 w-[350px] flex justify-center items-center cursor-pointer"
           )}
         >
@@ -27,4 +27,3 @@ export function Sections({ type }) {
     </div>
   );
 }
-

@@ -14,6 +14,7 @@ import { Personal } from "./personal/Personal.jsx";
 import { AdminVideo } from "./video/AdminVideo.jsx";
 import { AdminPlaylist } from "./playlists/AdminPlaylist.jsx";
 import { Sections } from "./sections.jsx";
+import { AdminStreams } from "./streams/AdminStreams.jsx";
 
 export default function PanelControl({adminInfo}) {
     const location = useLocation();
@@ -35,7 +36,7 @@ export default function PanelControl({adminInfo}) {
                 newPageInfo.component = <AdminVideo/>;
                 newPageInfo.name = "видео";
             } else if (page === 'stream') {
-                newPageInfo.component = <AdminVideo/>;
+                newPageInfo.component = <AdminStreams/>;
                 newPageInfo.name = "стрим";
             } else if (page === 'playlist') {
                 newPageInfo.component = <AdminPlaylist/>;

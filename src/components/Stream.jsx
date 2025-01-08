@@ -20,7 +20,7 @@ function Stream() {
         <div className="player">
             <div className="container">
                 <div className="player-main">
-                    <video className="player-main-video" src="http://localhost:80/api/stream.mp4?src=cf97650f-cfa2-4f14-9dde-241140e8332f" controls autoPlay muted>
+                    <video className="player-main-video" src="http://localhost:80/api/stream.mp4?src=cf02d97c-aee1-40aa-8564-4efa80d6bbc5" controls autoPlay muted>
                     </video>
                     <div className="player-main-info">
                         <div className="player-main-info-tutor">

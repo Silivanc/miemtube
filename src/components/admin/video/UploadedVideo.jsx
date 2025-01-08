@@ -22,8 +22,6 @@ export function UploadedVideo({ isAdmin }) {
             });
     }, [isAdmin]);
 
-    console.log(videos);
-
     return (
         <div className="p-0 w-full max-h-[500px] overflow-y-auto"> {/* Прокрутка по вертикали */}
             {/* Заголовок */}
