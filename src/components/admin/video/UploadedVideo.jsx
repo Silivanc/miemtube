@@ -9,7 +9,14 @@ export function UploadedVideo({ isAdmin }) {
 
     useEffect(() => {
         Videos.getVideosWithDuration()
-            .then(setVideos)
+            .then(data => {
+                // Преобразуем даты в нужный формат перед сохранением
+                const formattedData = data.map(video => ({
+                    ...video,
+                    created: new Date(video.created).toISOString().split('T')[0], // Формат YYYY-MM-DD
+                }));
+                setVideos(formattedData);
+            })
             .catch((error) => {
                 console.error("Error fetching playlists:", error);
             });
@@ -18,7 +25,7 @@ export function UploadedVideo({ isAdmin }) {
     console.log(videos);
 
     return (
-        <div className="p-0 w-full">
+        <div className="p-0 w-full max-h-[500px] overflow-y-auto"> {/* Прокрутка по вертикали */}
             {/* Заголовок */}
             <div className="grid grid-cols-5 gap-4 items-center bg-gray-100 font-medium text-left p-4 border-b border-gray-300">
                 <span>Название</span>
@@ -37,7 +44,7 @@ export function UploadedVideo({ isAdmin }) {
                     >
                         <span>{video.title}</span>
                         <span>{video.series}</span>
-                        <span>{video.created}</span>
+                        <span>{video.created}</span> {/* Форматированная дата */}
                         <span>{video.duration}</span>
                         <div className="flex gap-2">
                             <button className="w-6 h-6 flex items-center justify-center">
