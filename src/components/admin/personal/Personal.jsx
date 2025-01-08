@@ -17,7 +17,7 @@ export function Personal() {
     }, []); // useEffect с пустым массивом зависимостей, запускается только один раз
 
     return (
-        <div className="p-0 w-full">
+        <div className="p-0 w-full max-h-[500px] overflow-y-auto">
             <div className="grid grid-cols-3 gap-4 items-center bg-gray-100 font-medium text-left p-4 border-none border-gray-300">
                 <span>Имя</span>
                 <span>Почта</span>
