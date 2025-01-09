@@ -1,9 +1,6 @@
-import UploadVideo from "../UploadVideo.jsx";
-import UploadStream from "../UploadStream.jsx";
 import {Link, useLocation, useMatch} from "react-router-dom";
 import {PanelControlButton} from "../panelControl/uikit/panelControlButton.jsx";
 import {VideoIcon} from "../panelControl/icons/videoIcon.jsx";
-import Playlists from "../Playlists.jsx";
 import {PlaylistsIcon} from "../panelControl/icons/playlistsIcon.jsx";
 import { PersonalIcon } from "../panelControl/icons/personalIcon.jsx";
 import {StreamsIcon} from "../panelControl/icons/streamsIcon.jsx";

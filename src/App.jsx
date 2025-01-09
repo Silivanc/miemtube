@@ -47,8 +47,6 @@ function App() {
             <Route path={routes.adminStream} element={<Admin />} />
             <Route path={routes.adminPlaylist} element={<Admin />} />
 
-
-
             <Route path={routes.uploadVideo} element={<PanelControl />} />
             <Route path={routes.uploadedVideo} element={<PanelControl />} />
             <Route path={routes.uploadedStream} element={<PanelControl />} />

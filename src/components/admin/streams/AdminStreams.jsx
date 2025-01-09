@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { UploadedStreams } from "./UploadedStreams";
 import clsx from "clsx";
+import { CreateStream } from "./CreateStream";
 
 export function AdminStreams() {
     const [activeIndex, setActiveIndex] = useState(0);  // Состояние для отслеживания активной вкладки
@@ -11,7 +12,7 @@ export function AdminStreams() {
             <Sections activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
 
             {/* Условный рендеринг компонента в зависимости от активной вкладки */}
-            {activeIndex === 0 ? <UploadedStreams isAdmin={true}/> : <></>}
+            {activeIndex === 0 ? <UploadedStreams isAdmin={true}/> : <CreateStream/>}
         </div>
     );
 }

@@ -9,14 +9,9 @@ export function UploadedStreams({isAdmin}) {
      
         useEffect(() => { 
             Streams.getStreams() 
-                .then(data => { 
-                    // Преобразуем даты в нужный формат перед сохранением 
-                    const formattedData = data.map(stream => ({ 
-                        ...stream, 
-                        created: new Date(stream.created).toISOString().split('T')[0], // Формат YYYY-MM-DD 
-                    })); 
-                    setStreams(formattedData); 
-                }) 
+                .then(
+                    setStreams
+                ) 
                 .catch((error) => { 
                     console.error("Error fetching playlists:", error); 
                 }); 
@@ -40,18 +35,18 @@ export function UploadedStreams({isAdmin}) {
      
                 {/* Данные видео */} 
                 {streams.length > 0 ? ( 
-                    streams.map((video, index) => ( 
+                    streams.map((stream, index) => ( 
                         <div 
                             key={index} 
                             className="grid grid-cols-5 gap-4 items-center p-4 border-b border-gray-200 hover:bg-gray-50" 
                         > 
-                            <span>{streams.name}</span> 
-                            <span>{streams.stream_source_url}</span> 
-                            <span>{streams.stream_source_profile_id}</span> {/* Форматированная дата */} 
-                            <span>{streams.start_time}</span> 
-                            <span>{streams.end_time}</span> 
-                            <span>{streams.is_captured}</span> 
-                            <span>{streams.stream_status}</span> 
+                            <span>{stream.name}</span> 
+                            <span>{stream.stream_source_url}</span> 
+                            <span>{stream.stream_source_profile_id}</span> 
+                            <span>{stream.start_time}</span> 
+                            <span>{stream.end_time}</span> 
+                            <span>{stream.is_captured}</span> 
+                            <span>{stream.stream_status}</span> 
                             <div className="flex gap-2"> 
                                 <button className="w-6 h-6 flex items-center justify-center"> 
                                     <img src={editIcon} alt="Редактировать" className="w-6 h-6" /> 

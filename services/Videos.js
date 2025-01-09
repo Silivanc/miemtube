@@ -25,6 +25,21 @@ export class Videos {
         return await HttpStream.request(config.streamHost + 'plan');
     }
 
+    static async getVideosWithFullInfo(limit = "") {
+        const videos = await HttpRequest.request(config.host + 'events?filter=status:EVENTS.EVENTS.STATUS.PROCESSED');
+            console.log(videos);    
+        return await Promise.all(
+            videos.map(async video => {
+                const publications = await HttpRequest.request(config.host + 'events/' + video.identifier + '/publications', 'GET', null, true);
+                const previewUrl = publications[0]['attachments']
+                    .find(attachment => attachment['flavor'] === 'presenter/player+preview')['url'];
+                const duration = convertMillsToSeconds(publications[0]['media'][0]['duration']);
+                const videoSize = (publications[0]['media'][0]['size'] / 1024 / 1024).toFixed(2);
+                return {...video, preview: previewUrl, size: videoSize, duration: duration}
+            })
+        );
+    }
+
     static async getVideos(limit = "") {
         return await HttpStream.request(config.host + 'events?limit=' + limit);
     }

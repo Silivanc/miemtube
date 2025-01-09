@@ -89,25 +89,25 @@ export function Navbar() {
             <div className="absolute left-0 w-40 origin-top-left bg-white divide-y divide-gray-100 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
               <div className="py-1">
                 <Link
-                  to={routes.personal}
+                  to={routes.admin}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Личный кабинет
                 </Link>
                 <Link
-                  to="#"
+                  to={routes.adminVideo}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Мои видео
                 </Link>
                 <Link
-                  to="#"
+                  to={routes.adminStream}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Мои трансляции
                 </Link>
                 <Link
-                  to="#"
+                  to={routes.adminPlaylist}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Мои курсы

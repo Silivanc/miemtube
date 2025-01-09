@@ -30,7 +30,12 @@ export class HttpRequest {
         }
 
         if (body) {
-            params.body = body;
+            if (body instanceof FormData) {
+                params.body = body;
+            } else {
+                params.body = JSON.stringify(body);
+            }
+            
         }
         const response = await fetch(url, params);
 

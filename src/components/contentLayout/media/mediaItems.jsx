@@ -15,7 +15,7 @@ export function MediaItems({ type, amount = -1 }) {
     }
 
     if (type === "videos") {
-      Videos.getVideos()
+      Videos.getVideosWithFullInfo()
         .then(setMediaItems)
         .catch((error) => {
           console.error("Error fetching playlists:", error);

@@ -2,14 +2,10 @@ import config from "../../../../config/config.js";
 import "./UploadVideo.scss";
 import React, { useState, useEffect } from "react";
 import { HttpRequest } from "../../../../services/Http.js";
-import Dropzone from "./Dropzone.jsx";
+import Dropzone from "../Dropzone.jsx";
 import { useMatch } from "react-router-dom";
 import clsx from "clsx";
 import { Videos } from "../../../../services/Videos.js";
-
-const uploadInfoElementStyles =
-  "px-2 py-1 " +
-  "mb-3 border-[3px] border-solid border-[#D9D9D9] rounded-[20px]";
 
 export function UploadVideo() {
   const [playlists, setPlaylists] = useState([]);
@@ -90,63 +86,67 @@ export function UploadVideo() {
 
   return (
     <>
-      <form className="upload-form flex flex-col" onSubmit={handleSubmit}>
-  <div className="flex">
-    <div className="upload-content">
-      <Dropzone onFileSelect={handleFileSelect} />
-      <div className="">
-        <div className="font-semibold mb-4">Добавить превью</div>
-        <Dropzone />
-      </div>
-    </div>
-    <div className="upload-info">
-      <input
-        name="videoTitle" // Добавлен атрибут name
-        className={clsx(uploadInfoElementStyles, "h-10 mb-4")}
-        placeholder="Введите название"
-      />
-      <textarea
-        name="description" // Дополнительное поле, если нужно
-        className={clsx("h-28 -mt-1", uploadInfoElementStyles)}
-        placeholder="Введите описание"
-      ></textarea>
-      <div>
-        <input
-          type="checkbox"
-          id="trimVideo"
-          name="trimVideo" // Уникальное имя для чекбокса
-          className="upload-info-checkbox upload-info-element"
-        />
-        <label htmlFor="trimVideo">Удалить кадры без звука</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          id="archiveVideo"
-          name="archiveVideo" // Уникальное имя для чекбокса
-          className="upload-info-checkbox upload-info-element"
-        />
-        <label htmlFor="archiveVideo">Сжать видео (VP9)</label>
-      </div>
-      <label htmlFor="playlist" className="mb-2">
-        Добавить в плейлист
-      </label>
-      <select name="playlist" id="playlist" className="upload-info-element">
-        <option value="">-- Не выбирать плейлист --</option>
-        {playlists.map((playlist) => (
-          <option key={playlist.identifier} value={playlist.identifier}>
-            {playlist.title}
-          </option>
-        ))}
-      </select>
-    </div>
-  </div>
-  <button className="w-[291px] h-[62px] text-white rounded-full bg-[#244A9A] ">
-    Загрузить
-  </button>
-</form>
+      <form className="flex flex-col p-8" onSubmit={handleSubmit}>
+        <div className="flex">
+          <div className="max-w-[291px] mr-7">
+            <Dropzone onFileSelect={handleFileSelect} />
+            <div>
+              <div className="font-semibold mb-4">Добавить превью</div>
+              <Dropzone />
+            </div>
+          </div>
+          <div className="flex flex-col w-[492px]">
+            <input
+              name="videoTitle"
+              className={clsx("mb-4 border-2 border-gray-400 rounded-lg px-3 py-2 h-10")}
+              placeholder="Введите название"
+            />
+            <textarea
+              name="description"
+              className={clsx("mb-4 border-2 border-gray-400 rounded-lg px-3 py-2 h-28")}
+              placeholder="Введите описание"
+            ></textarea>
+            <div className="mb-4">
+              <input
+                type="checkbox"
+                id="trimVideo"
+                name="trimVideo"
+                className="mr-2"
+              />
+              <label htmlFor="trimVideo">Удалить кадры без звука</label>
+            </div>
+            <div className="mb-4">
+              <input
+                type="checkbox"
+                id="archiveVideo"
+                name="archiveVideo"
+                className="mr-2"
+              />
+              <label htmlFor="archiveVideo">Сжать видео (VP9)</label>
+            </div>
+            <label htmlFor="playlist" className="mb-2 font-medium">
+              Добавить в плейлист
+            </label>
+            <select
+              name="playlist"
+              id="playlist"
+              className="mb-4 border-2 border-gray-400 rounded-lg px-3 py-2"
+            >
+              <option value="">-- Не выбирать плейлист --</option>
+              {playlists.map((playlist) => (
+                <option key={playlist.identifier} value={playlist.identifier}>
+                  {playlist.title}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <button className="w-[291px] h-[62px] text-white bg-[#244A9A] rounded-full">
+          Загрузить
+        </button>
+      </form>
     </>
-  );
+  );  
 }
 
 async function uploadVideo(body) {
