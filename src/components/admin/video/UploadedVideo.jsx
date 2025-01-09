@@ -8,7 +8,7 @@ export function UploadedVideo({ isAdmin }) {
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
-        Videos.getVideosWithDuration()
+        Videos.getVideosWithFullInfo()
             .then(data => {
                 // Преобразуем даты в нужный формат перед сохранением
                 const formattedData = data.map(video => ({

@@ -9,17 +9,19 @@ export function Navbar() {
   const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
 
+  const exit = () => {
+    localStorage.clear();
+    setIsAuth(false); 
+  };
+  
+
   useEffect(() => {
     Auth.checkMe()
-      .then(setIsAuth)
+      .then(result => setIsAuth(!!result))
       .catch((error) => console.log(error));
-  });
+  }, [isAuth]);
 
-  const exit = (e) => {
-    e.preventDefault();
-    localStorage.clear();
-    setIsAuth(false);
-  };
+  console.log("Пользователь авторизован: " + isAuth);
 
   return (
     <nav className="sticky top-0 py-[21px] px-[38px] text-white text-base leading-tight flex items-center justify-between bg-[#234A9A] shadow-md z-50 w-full">

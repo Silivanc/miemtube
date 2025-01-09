@@ -9,6 +9,7 @@ export const routes = {
     adminVideo: '/admin/video',
     adminPlaylist: '/admin/playlist',
     adminStream: '/admin/stream',
+    adminUsers: '/admin/users',
     uploadedStream: '/admin/stream/uploaded',
     uploadStream: '/admin/stream/upload',
     uploadedVideo: '/admin/video/uploaded',

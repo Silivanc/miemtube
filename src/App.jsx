@@ -13,6 +13,7 @@ import Playlists2 from "./components/Playlists2.jsx";
 import { Footer } from "./components/footer";
 import { Login } from "./components/login/Login";
 import { Admin } from "./pages/Admin";
+import Streams from "./components/Streams";
 
 function IsNavbar() {
   const location = useLocation();
@@ -34,7 +35,7 @@ function App() {
             <Route path={routes.uploadedVideo} element={<Playlist />} />
             <Route path={routes.playlists} element={<Playlists2 />} />
             <Route path={routes.playlist} element={<Playlist />} />
-            <Route path={routes.streams} element={<Playlists />} />
+            <Route path={routes.streams} element={<Streams />} />
             <Route path={routes.stream} element={<Stream />} />
             <Route path="/:playlistId/:videoId" element={<Player />} />
             <Route path="/playlists/:videoId" element={<Player />} />
@@ -46,6 +47,7 @@ function App() {
             <Route path={routes.adminVideo} element={<Admin />} />
             <Route path={routes.adminStream} element={<Admin />} />
             <Route path={routes.adminPlaylist} element={<Admin />} />
+            <Route path={routes.adminUsers} element={<Admin />} />
 
             <Route path={routes.uploadVideo} element={<PanelControl />} />
             <Route path={routes.uploadedVideo} element={<PanelControl />} />

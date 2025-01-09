@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Videos } from "../../../../services/Videos.js";
 import { MediaItem } from "./mediaItem.jsx";
+import { Streams } from "../../../../services/Stream.js";
 
 export function MediaItems({ type, amount = -1 }) {
   const [mediaItems, setMediaItems] = useState([]);
@@ -23,7 +24,7 @@ export function MediaItems({ type, amount = -1 }) {
     }
 
     if (type === "streams") {
-      Videos.getStreams()
+      Streams.getStreams()
         .then(setMediaItems)
         .catch((error) => {
           console.error("Error fetching playlists:", error);
