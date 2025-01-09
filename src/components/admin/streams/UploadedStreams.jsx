@@ -38,7 +38,7 @@ export function UploadedStreams({isAdmin}) {
                     streams.map((stream, index) => ( 
                         <div 
                             key={index} 
-                            className="grid grid-cols-5 gap-4 items-center p-4 border-b border-gray-200 hover:bg-gray-50" 
+                            className="grid grid-cols-8 gap-4 items-center p-4 border-b border-gray-200 hover:bg-gray-50" 
                         > 
                             <span>{stream.name}</span> 
                             <span>{stream.stream_source_url}</span> 
