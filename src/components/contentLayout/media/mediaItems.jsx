@@ -3,12 +3,11 @@ import { Videos } from "../../../../services/Videos.js";
 import { MediaItem } from "./mediaItem.jsx";
 import { Streams } from "../../../../services/Streams.js";
 
-export function MediaItems({ type, amount = 100 }) {
+export function MediaItems({ type, length = 100, status = "" }) {
   const [mediaItems, setMediaItems] = useState([]);
-
   useEffect(() => {
     if (type === "playlists") {
-      Videos.getPlaylists(amount)
+      Videos.getPlaylists(length)
         .then(setMediaItems)
         .catch((error) => {
           console.error("Error fetching playlists:", error);
@@ -24,29 +23,30 @@ export function MediaItems({ type, amount = 100 }) {
     }
 
     if (type === "streams") {
-      Streams.getStreams(amount)
+      Streams.getStreams(length, status)
         .then((result) => {
           if (result) {
-            setMediaItems(result.map(item => {
+            const newMediaItems = result.map(item => {
               let newMediaItem = {...item};
               newMediaItem.identifier = item.id;
               newMediaItem.title = item.name;
               newMediaItem.creator = item.author_username;
               return newMediaItem
-            }));
+            })
+            setMediaItems(newMediaItems);
           }
           })
         .catch((error) => {
           console.error("Error fetching playlists:", error);
         });
     }
-  }, [type, amount]);
+  }, [type, length]);
 
 
   return (
     <>
       {mediaItems.length === 0 ? (
-        <div>Данные отсутcтвуют</div>
+        <div>Нет данных</div>
       ) : (
         <div className="grid grid-cols-4 justify-items-center">
           {mediaItems.map((item, index) => {

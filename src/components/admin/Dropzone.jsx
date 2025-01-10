@@ -23,7 +23,7 @@ export default function Dropzone(props) {
         <section className="dropzone">
             <div {...getRootProps({ className: 'dropzone-input' })}>
                 <input
-                    {...getInputProps()}
+                    {...getInputProps({accept: 'video/mp4',})}
                 />
                 <p>Загрузить файл</p>
                 <aside className="dropzone-file">

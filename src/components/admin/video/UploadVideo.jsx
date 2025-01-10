@@ -11,12 +11,13 @@ export function UploadVideo() {
   const [playlists, setPlaylists] = useState([]);
   const [videoFile, setVideoFile] = useState("");
   const [videoTitle, setVideoTitle] = useState("");
-  // Функция для получения видео (используем внутри useEffect)
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     Videos.getPlaylists()
     .then(setPlaylists)
     .catch(error => console.log(error))
-  }, []); // Пустой массив зависимостей означает, что эффект выполнится один раз при монтировании
+  }, []); 
 
   const handleFileSelect = (file) => {
     setVideoFile(file);
@@ -27,16 +28,14 @@ export function UploadVideo() {
     console.log("Видео отправлено для загрузки");
     event.preventDefault();
   
-    // Создаём объект FormData из формы
     const form = event.target;
     const formData = new FormData(form);
   
-    // Извлекаем значения чекбоксов, плейлиста и других полей
-    const videoTitle = formData.get("videoTitle"); // Название видео
-    const videoDescription = formData.get("description"); // Название видео
-    const trimVideo = formData.get("trimVideo") === "on"; // Чекбокс "Удалить кадры без звука"
-    const archiveVideo = formData.get("archiveVideo") === "on"; // Чекбокс "Сжать видео"
-    const selectedPlaylist = formData.get("playlist"); // Выбранный плейлист (ID)
+    const videoTitle = formData.get("videoTitle"); 
+    const videoDescription = formData.get("description"); 
+    const trimVideo = formData.get("trimVideo") === "on"; 
+    const archiveVideo = formData.get("archiveVideo") === "on"; 
+    const selectedPlaylist = formData.get("playlist"); 
   
     const metadata = JSON.stringify([
       {
@@ -75,23 +74,37 @@ export function UploadVideo() {
     uploadData.append("processing", processing);
     uploadData.append("acl", acl);
   
+    setIsLoading(true);
     try {
-      const result = await uploadVideo(uploadData); // Отправляем данные
+      const result = await uploadVideo(uploadData); 
       console.log("Результат загрузки:", result);
+      if (!result) {
+        alert("Ошибка при загрузке");
+      } else {
+        alert("Видео отправлено на загрузку");
+      }
     } catch (error) {
       console.error("Ошибка при загрузке:", error);
+      alert("Ошибка при загрузке:", error);
+    } finally {
+      setIsLoading(false); 
     }
   };
   
 
   return (
     <>
+    {isLoading && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="text-white text-xl">Загрузка...</div>
+        </div>
+      )}
       <form className="flex flex-col p-8" onSubmit={handleSubmit}>
         <div className="flex">
           <div className="max-w-[291px] mr-7">
             <Dropzone onFileSelect={handleFileSelect} />
             <div>
-              <div className="font-semibold mb-4">Добавить превью</div>
+              <div className="font-semibold mb-4">Добавить превью (пока не работает)</div>
               <Dropzone />
             </div>
           </div>
@@ -100,6 +113,7 @@ export function UploadVideo() {
               name="videoTitle"
               className={clsx("mb-4 border-2 border-gray-400 rounded-lg px-3 py-2 h-10")}
               placeholder="Введите название"
+              required
             />
             <textarea
               name="description"

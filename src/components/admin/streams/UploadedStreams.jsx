@@ -21,11 +21,12 @@ export function UploadedStreams({isAdmin}) {
  
         return ( 
             <div className="p-0 w-full max-h-[500px] overflow-y-auto"> {/* Прокрутка по вертикали */} 
+                
                 {/* Заголовок */} 
                 <div className="grid grid-cols-8 gap-4 items-center bg-gray-100 font-medium text-left p-4 border-b border-gray-300"> 
                     <span>Название</span> 
-                    <span>URL</span> 
-                    <span>ID профиля</span> 
+                    <span>Автор</span> 
+                    <span>Источник</span> 
                     <span>Старт</span> 
                     <span>Окончание</span> 
                     <span>Запись</span> 
@@ -43,8 +44,8 @@ export function UploadedStreams({isAdmin}) {
                             <span>{stream.name}</span> 
                             <span>{stream.author_username}</span> 
                             <span>{stream.stream_source_profile_id ?? stream.stream_source_url}</span> 
-                            <span>{stream.start_time}</span> 
-                            <span>{stream.end_time}</span> 
+                            <span>{stream.start_time.split('.')[0]}</span> 
+                            <span>{stream.end_time.split('.')[0]}</span> 
                             <span>{stream.is_captured ? "Да" : "Нет"}</span> 
                             <span>{stream.stream_status}</span> 
                             <div className="flex gap-2"> 

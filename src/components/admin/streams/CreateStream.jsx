@@ -8,6 +8,7 @@ const sharedInputStyles = "mb-4 border-2 border-gray-400 rounded-lg px-2 py-2";
 export function CreateStream() {
   const [profiles, setProfiles] = useState([]);
   const [isCustomSource, setIsCustomSource] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     Streams.getProfiles()
@@ -32,10 +33,7 @@ export function CreateStream() {
     const startTime = new Date(formData.get("start_time"));
     const endTime = new Date(formData.get("end_time"));
     const isCaptured = formData.get("is_captured") === "on";
-    const streamSourceUrl = formData.get("stream_source") != 'custom' ? formData.get("stream_source") : formData.get("stream_source_url")
-
-    // endTime.setHours(endTime.getHours() - 3);
-    // startTime.setHours(endTime.getHours() - 3);
+    const streamSourceUrl = formData.get("stream_source") != 'custom' ? formData.get("stream_source") : formData.get("stream_source_url");
 
     const payload = {
       name,
@@ -50,7 +48,21 @@ export function CreateStream() {
     console.log("Form submitted:", payload);
 
     const result = Streams.planStream(payload);
-    console.log(result);
+    setIsLoading(true);
+    try {
+      const result = await uploadVideo(uploadData); 
+      console.log("Результат загрузки:", result);
+      if (!result) {
+        alert("Ошибка при загрузке");
+      } else {
+        alert("Трансляция успешно запланирована");
+      }
+    } catch (error) {
+      console.error("Ошибка при загрузке:", error);
+      alert("Ошибка при загрузке:", error);
+    } finally {
+      setIsLoading(false); 
+    }
   };
 
   return (
@@ -58,7 +70,7 @@ export function CreateStream() {
       <div className="flex mb-4">
       <div className="max-w-[291px] mr-7">
         <div className="mb-4">
-          <div className="font-semibold mb-4">Превью трансляции</div>
+          <div className="font-semibold mb-4">Превью трансляции (пока не работает)</div>
           <Dropzone />
         </div>
         <div>
@@ -87,6 +99,7 @@ export function CreateStream() {
           name="name"
           className={clsx(sharedInputStyles, "h-10")}
           placeholder="Введите название"
+          required
         />
         <textarea
           name="description"

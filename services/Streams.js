@@ -8,9 +8,10 @@ export class Streams {
         return await HttpRequest.request(config.stream + 'plan/' + streamId, "GET", null, true);
     }
 
-    static async getStreams(limit = 100) {
-        const result = await HttpRequest.request(config.stream + 'plan?limit=' + limit + '&order_by=dt_updated', "GET", null, true);
-        console.log(result);
+    static async getStreams(limit = 100, status = "") {
+        const streamStatus = status !== "" ? "&stream_status=" + status : ""; 
+        const result = await HttpRequest.request(config.stream + 'plan?limit=' + limit + streamStatus, "GET", null, true);
+        
         return result;
     }
 

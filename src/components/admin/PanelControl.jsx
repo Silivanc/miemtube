@@ -28,7 +28,7 @@ export default function PanelControl({ adminInfo }) {
       newPageInfo.title = "Личный кабинет";
       newPageInfo.component = <Personal />;
     } else {
-      newPageInfo.title = "Панель управления контента";
+      newPageInfo.title = "Панель управления контентом";
     }
 
     if (page === "video") {
