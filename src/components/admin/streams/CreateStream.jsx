@@ -47,10 +47,9 @@ export function CreateStream() {
 
     console.log("Form submitted:", payload);
 
-    const result = Streams.planStream(payload);
     setIsLoading(true);
     try {
-      const result = await uploadVideo(uploadData); 
+      const result = await Streams.planStream(payload); 
       console.log("Результат загрузки:", result);
       if (!result) {
         alert("Ошибка при загрузке");
