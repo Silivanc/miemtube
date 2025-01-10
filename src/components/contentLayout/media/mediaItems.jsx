@@ -3,11 +3,11 @@ import { Videos } from "../../../../services/Videos.js";
 import { MediaItem } from "./mediaItem.jsx";
 import { Streams } from "../../../../services/Streams.js";
 
-export function MediaItems({ type, length = 100, status = "" }) {
+export function MediaItems({ type, length = 100, status = "", search = ""}) {
   const [mediaItems, setMediaItems] = useState([]);
   useEffect(() => {
     if (type === "playlists") {
-      Videos.getPlaylists(length)
+      Videos.getPlaylists(length, search)
         .then(setMediaItems)
         .catch((error) => {
           console.error("Error fetching playlists:", error);
@@ -15,7 +15,7 @@ export function MediaItems({ type, length = 100, status = "" }) {
     }
 
     if (type === "videos") {
-      Videos.getVideosWithFullInfo()
+      Videos.getVideosWithFullInfo(length, search)
         .then(setMediaItems)
         .catch((error) => {
           console.error("Error fetching playlists:", error);
@@ -23,7 +23,7 @@ export function MediaItems({ type, length = 100, status = "" }) {
     }
 
     if (type === "streams") {
-      Streams.getStreams(length, status)
+      Streams.getStreams(length, status, search)
         .then((result) => {
           if (result) {
             const newMediaItems = result.map(item => {
@@ -40,7 +40,7 @@ export function MediaItems({ type, length = 100, status = "" }) {
           console.error("Error fetching playlists:", error);
         });
     }
-  }, [type, length]);
+  }, [type, length, search]);
 
 
   return (

@@ -61,11 +61,6 @@ export default function Player() {
                     <div className="player-main-title">{video.videoInfo.title}</div>
                     <div className="player-main-info">
                         <div className="player-main-info-tutor">
-                            <img
-                                className="player-main-info-tutor-photo"
-                                src="../../public/static/images/circtle.png"
-                                alt="Преподаватель"
-                            />
                             <div className="player-main-info-tutor-name">{video.videoInfo.creator}</div>
                         </div>
                         <div className="player-main-info-date">

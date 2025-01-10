@@ -33,9 +33,9 @@ function App() {
           <Routes>
             <Route path="/" element={<ContentLayout />} />
             <Route path={routes.uploadedVideo} element={<Playlist />} />
-            <Route path={routes.playlists} element={<Playlists2 />} />
+            <Route path={routes.playlists} element={<ContentLayout />} />
             <Route path={routes.playlist} element={<Playlist />} />
-            <Route path={routes.streams} element={<Streams />} />
+            <Route path={routes.streams} element={<ContentLayout />} />
             <Route path={routes.stream} element={<Stream />} />
             <Route path="/:playlistId/:videoId" element={<Player />} />
             <Route path="/playlists/:videoId" element={<Player />} />

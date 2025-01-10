@@ -25,8 +25,10 @@ export class Videos {
         return await HttpStream.request(config.streamHost + 'plan');
     }
 
-    static async getVideosWithFullInfo(limit = "") {
-        const videos = await HttpRequest.request(config.host + 'events?filter=status:EVENTS.EVENTS.STATUS.PROCESSED');  
+    static async getVideosWithFullInfo(limit = "", title = "") {
+        const videoTitle = title && title !== "" ? "textFilter:" + title : ""; 
+        const videos = await HttpRequest.request(config.host + 'events?filter=status:EVENTS.EVENTS.STATUS.PROCESSED,' + videoTitle + '&limit=' + limit);
+
         return await Promise.all(
             videos.map(async video => {
                 const publications = await HttpRequest.request(config.host + 'events/' + video.identifier + '/publications', 'GET', null, true);
@@ -39,8 +41,9 @@ export class Videos {
         );
     }
 
-    static async getVideos(limit = "") {
-        return await HttpStream.request(config.host + 'events?limit=' + limit);
+    static async getVideos(limit = "", title = "") {
+        const playlistTitle = title !== "" ? "&filter=textFilter:" + title : ""; 
+        return await HttpStream.request(config.host + 'events?limit=' + limit + playlistTitle);
     }
 
     static async getVideosWithDuration(limit = "") {
@@ -55,8 +58,9 @@ export class Videos {
         );
     }
 
-    static async getPlaylists(limit = "") {
-        return await HttpRequest.request(config.host + 'series?limit=' + limit);
+    static async getPlaylists(limit = "", title = "") {
+        const playlistTitle = (title && title !== "") ? "&filter=textFilter:" + title : ""; 
+        return await HttpRequest.request(config.host + 'series?limit=' + limit + playlistTitle);
     }
 
     static async getMediaContent(pathname) {
