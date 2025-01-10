@@ -18,11 +18,9 @@ export default function Player() {
     }, [videoId]);
 
     useEffect(() => {
-        if (playlistId === 'playlists') {
             Videos.getVideosFromPlaylist(playlistId)
                 .then(setVideos)
                 .catch(error => console.error("Error fetching video list:", error));
-        }
     }, [playlistId]);
 
     // Определение MIME типа на основе расширения файла
@@ -95,7 +93,7 @@ export default function Player() {
                     </div>
                 </div>
                 <div className="player-recommend">
-                    {playlistId === 'playlists' && videos && videos.length > 0 ? (
+                    {videos && videos.length > 1 ? (
                         <>
                             <div className="player-recommend-next">
                                 {videos[videoIndex + 1] ? (
