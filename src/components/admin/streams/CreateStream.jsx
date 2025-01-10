@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Streams } from "../../../../services/Stream";
+import { Streams } from "../../../../services/Streams";
 import Dropzone from "../Dropzone.jsx";
 import clsx from "clsx";
 
@@ -29,12 +29,13 @@ export function CreateStream() {
 
     const name = formData.get("name");
     const description = formData.get("description");
-    const startTime = formData.get("start_time");
-    const endTime = (new Date(formData.get("end_time")));
+    const startTime = new Date(formData.get("start_time"));
+    const endTime = new Date(formData.get("end_time"));
     const isCaptured = formData.get("is_captured") === "on";
     const streamSourceUrl = formData.get("stream_source") != 'custom' ? formData.get("stream_source") : formData.get("stream_source_url")
 
-    console.log((endTime.setHours(endTime.getHours() - 3)));
+    // endTime.setHours(endTime.getHours() - 3);
+    // startTime.setHours(endTime.getHours() - 3);
 
     const payload = {
       name,

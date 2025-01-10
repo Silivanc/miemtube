@@ -40,8 +40,6 @@ export function Users() {
                                         <img src={trashIcon} alt="Удалить" className="w-6 h-6" />   
                                     </button>
                                 </div>
-                                {/* <Popup visibility='fixed'></Popup> */}
-                                <input value='123' readOnly className="outline-none cursor-default"></input>
                     </div>
                 ))
             ) : (

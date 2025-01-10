@@ -4,7 +4,7 @@ export function MediaItem({ item, type }) {
   return (
     <Link
       to={{
-        pathname: `/${type === 'playlists' ? item.identifier : type+'/'+item.identifier}`,
+        pathname: `/${type === 'playlists' ? item?.identifier : type+'/'+item?.identifier}`,
       }}
     >
       <div className="w-[315px] mb-9">
@@ -13,9 +13,9 @@ export function MediaItem({ item, type }) {
         </div>
         <div className="flex">
           <div className="playlists-element-info-text">
-            <div className="text-base overflow-hidden line-clamp-1">{item.title}</div>
+            <div className="text-base overflow-hidden line-clamp-1">{item?.title}</div>
             <div className="text-xs">
-              {item.creator}
+              {item?.creator}
             </div>
           </div>
         </div>

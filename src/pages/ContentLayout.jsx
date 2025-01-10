@@ -10,7 +10,7 @@ export default function ContentLayout() {
             <h1 className="text-2xl font-semibold mb-5">Видео</h1>
              <MediaItems type="videos" amount={8}></MediaItems>
              <h1 className="text-2xl font-semibold mb-5">Трансляции</h1>
-             <MediaItems type="playlists" amount={4}></MediaItems>
+             <MediaItems type="streams" amount={4}></MediaItems>
              <h1 className="text-2xl font-semibold mb-5">Курсы</h1>
              <MediaItems type="playlists" amount={8}></MediaItems>
             </div>

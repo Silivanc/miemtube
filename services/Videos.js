@@ -26,15 +26,14 @@ export class Videos {
     }
 
     static async getVideosWithFullInfo(limit = "") {
-        const videos = await HttpRequest.request(config.host + 'events?filter=status:EVENTS.EVENTS.STATUS.PROCESSED');
-            console.log(videos);    
+        const videos = await HttpRequest.request(config.host + 'events?filter=status:EVENTS.EVENTS.STATUS.PROCESSED');  
         return await Promise.all(
             videos.map(async video => {
                 const publications = await HttpRequest.request(config.host + 'events/' + video.identifier + '/publications', 'GET', null, true);
-                const previewUrl = publications[0]['attachments']
-                    .find(attachment => attachment['flavor'] === 'presenter/player+preview')['url'];
+                const previewUrl = publications[0]?.['attachments']
+                    .find(attachment => attachment['flavor'].split('/')[1] === 'player+preview')?.['url'];
                 const duration = convertMillsToSeconds(publications[0]['media'][0]['duration']);
-                const videoSize = (publications[0]['media'][0]['size'] / 1024 / 1024).toFixed(2);
+                const videoSize = (publications[0]?.['media'][0]['size'] / 1024 / 1024).toFixed(2);
                 return {...video, preview: previewUrl, size: videoSize, duration: duration}
             })
         );
@@ -48,7 +47,7 @@ export class Videos {
         const videos = await HttpStream.request(config.host + 'events?limit=' + limit);
         return await Promise.all(
             videos.map(async video => {
-                const publications = await HttpRequest.request(config.host + 'events/' + video.identifier + '/publications', 'GET', null, true);
+                const publications = await HttpRequest.request(config.host + 'events/' + video.identifier + '/publications', 'GET');
                 console.log(publications);
                 const duration = convertMillsToSeconds(publications[0]['media'][0]['duration']);
                 return {...video, duration: duration}

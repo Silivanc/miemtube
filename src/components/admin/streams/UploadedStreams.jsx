@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"; 
-import { Streams } from "../../../../services/Stream.js"; 
+import { Streams } from "../../../../services/Streams.js"; 
 import editIcon from '../../../assets/images/edit.svg'; 
 import trashIcon from '../../../assets/images/trash.svg'; 
 import linkIcon from '../../../assets/images/link.svg'; 
@@ -41,11 +41,11 @@ export function UploadedStreams({isAdmin}) {
                             className="grid grid-cols-8 gap-4 items-center p-4 border-b border-gray-200 hover:bg-gray-50" 
                         > 
                             <span>{stream.name}</span> 
-                            <span>{stream.stream_source_url}</span> 
-                            <span>{stream.stream_source_profile_id}</span> 
+                            <span>{stream.author_username}</span> 
+                            <span>{stream.stream_source_profile_id ?? stream.stream_source_url}</span> 
                             <span>{stream.start_time}</span> 
                             <span>{stream.end_time}</span> 
-                            <span>{stream.is_captured}</span> 
+                            <span>{stream.is_captured ? "Да" : "Нет"}</span> 
                             <span>{stream.stream_status}</span> 
                             <div className="flex gap-2"> 
                                 <button className="w-6 h-6 flex items-center justify-center"> 

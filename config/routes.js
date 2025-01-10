@@ -4,7 +4,7 @@ export const routes = {
     personal: '/admin/personal',
     upload: '/admin/upload',
     streams: '/streams',
-    stream: '/stream',
+    stream: '/streams/:streamId',
     playlists: '/playlists',
     adminVideo: '/admin/video',
     adminPlaylist: '/admin/playlist',
@@ -17,5 +17,4 @@ export const routes = {
     uploadedPlaylists: '/dmin/playlists/uploaded',
     uploadPlaylists: '/admin/playlists/upload',
     playlist: '/:playlistId',
-    video: ':videoId',
 }
