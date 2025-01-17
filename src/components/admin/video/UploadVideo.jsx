@@ -1,5 +1,4 @@
 import config from "../../../../config/config.js";
-import "./UploadVideo.scss";
 import React, { useState, useEffect } from "react";
 import { HttpRequest } from "../../../../services/Http.js";
 import Dropzone from "../Dropzone.jsx";
@@ -10,7 +9,6 @@ import { Videos } from "../../../../services/Videos.js";
 export function UploadVideo() {
   const [playlists, setPlaylists] = useState([]);
   const [videoFile, setVideoFile] = useState("");
-  const [videoTitle, setVideoTitle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

@@ -1,54 +1,104 @@
-import { Link, useLocation, useMatch } from "react-router-dom";
+import { useMatch } from "react-router-dom";
 import { PanelControlButton } from "../panelControl/uikit/panelControlButton.jsx";
 import { VideoIcon } from "../panelControl/icons/videoIcon.jsx";
 import { PlaylistsIcon } from "../panelControl/icons/playlistsIcon.jsx";
 import { PersonalIcon } from "../panelControl/icons/personalIcon.jsx";
 import { StreamsIcon } from "../panelControl/icons/streamsIcon.jsx";
 import { UsersIcon } from "../panelControl/icons/personalIcon.jsx";
-import clsx from "clsx";
 import { routes } from "../../../config/routes.js";
 import { useEffect, useState } from "react";
 import { Personal } from "./personal/Personal.jsx";
-import { AdminVideo } from "./video/AdminVideo.jsx";
-import { AdminPlaylist } from "./playlists/AdminPlaylist.jsx";
-import { Sections } from "./sections.jsx";
-import { AdminStreams } from "./streams/AdminStreams.jsx";
 import { Users } from "./users/Users.jsx";
+import { UploadedStreams } from "./streams/UploadedStreams.jsx";
+import { CreateStream } from "./streams/CreateStream.jsx";
+import { UploadedVideo } from "./video/UploadedVideo.jsx";
+import { UploadVideo } from "./video/UploadVideo.jsx";
+import { UploadedPlaylists } from "./playlists/UploadedPlaylists.jsx";
+import { Sections } from "./Sections.jsx";
+
+const pages = {
+  personal: {
+    section: "Личный кабинет",
+    name: "Личный кабинет",
+    icon: <PersonalIcon />,
+    path: routes.admin,
+    component: <Personal />,
+  },
+  video: {
+    section: "Панель управления контентом",
+    icon: <VideoIcon />,
+    path: routes.adminVideo,
+    tabs: [
+      {
+        name: "Мои видео",
+        component: <UploadedVideo isAdmin={true} />,
+      },
+      {
+        name: "Загрузить видео",
+        component: <UploadVideo />,
+      },
+    ],
+  },
+  stream: {
+    section: "Панель управления контентом",
+    icon: <StreamsIcon />,
+    path: routes.adminStream,
+    tabs: [
+      {
+        name: "Мои трансляции",
+        component: <UploadedStreams isAdmin={true} />,
+      },
+      {
+        name: "Запланировать трансляцию",
+        component: <CreateStream />,
+      },
+    ],
+  },
+  playlist: {
+    section: "Панель управления контентом",
+    icon: <PlaylistsIcon />,
+    path: routes.adminPlaylist,
+    tabs: [
+      {
+        name: "Мои плейлисты",
+        component: <UploadedPlaylists isAdmin={true} />,
+      },
+      {
+        name: "Создать плейлист",
+        component: <CreateStream />,
+      },
+    ],
+  },
+  users: {
+    section: "Панель управления пользователями",
+    icon: <UsersIcon />,
+    path: routes.adminUsers,
+    tabs: [
+      {
+        name: "Пользователи",
+        component: <Users isAdmin={true} />,
+      },
+      {
+        name: "Добавить пользователя",
+        component: <CreateStream key={1} />,
+      },
+    ],
+  },
+};
 
 export default function PanelControl({ adminInfo }) {
-  const location = useLocation();
   const match = useMatch("/admin/:page/:section?");
   const page = match?.params?.page;
   const section = match?.params?.section;
   const [pageInfo, setPageInfo] = useState({});
 
   useEffect(() => {
-    let newPageInfo = { ...pageInfo };
-    if (page === undefined) {
-      newPageInfo.title = "Личный кабинет";
-      newPageInfo.component = <Personal />;
+    if (["video", "stream", "playlist", "users"].includes(page)) {
+      setPageInfo(pages[page]);
     } else {
-      newPageInfo.title = "Панель управления контентом";
+      setPageInfo(pages["personal"]);
     }
-
-    if (page === "video") {
-      newPageInfo.component = <AdminVideo />;
-      newPageInfo.name = "видео";
-    } else if (page === "stream") {
-      newPageInfo.component = <AdminStreams />;
-      newPageInfo.name = "стрим";
-    } else if (page === "playlist") {
-      newPageInfo.component = <AdminPlaylist />;
-      newPageInfo.name = "плейлист";
-    } else if (page === "users") {
-      newPageInfo.component = <Users />;
-      newPageInfo.name = "пользователи";
-    }
-
-    setPageInfo(newPageInfo);
   }, [page, section]);
-
-  console.log(pageInfo);
 
   return (
     <div className="flex min-h-screen text-base">
@@ -57,39 +107,29 @@ export default function PanelControl({ adminInfo }) {
             flex-column pt-[33px] w-[293px] border-r-[3px] border-[#D9D9D9]"
       >
         <div className="flex flex-col w-full">
-          <PanelControlButton
-            Icon={<PersonalIcon />}
-            name="Личный кабинет"
-            path={routes.admin}
-          />
-          <PanelControlButton
-            Icon={<VideoIcon />}
-            name="Видео"
-            path={routes.adminVideo}
-          />
-          <PanelControlButton
-            Icon={<StreamsIcon />}
-            name="Трансляции"
-            path={routes.adminStream}
-          />
-          <PanelControlButton
-            Icon={<PlaylistsIcon />}
-            name="Плейлисты"
-            path={routes.adminPlaylist}
-          />
-          <PanelControlButton
-            Icon={<UsersIcon />}
-            name="Пользователи"
-            path={routes.adminUsers}
-          />
+          {Object.values(pages).map((element) => (
+            <PanelControlButton
+              key={element.path}
+              Icon={element.icon}
+              name={element.name ? element.name : element.tabs[0].name}
+              path={element.path}
+            />
+          ))}
         </div>
       </div>
       <div className="w-full">
         <h1 className="p-[49px] text-3xl font-bold border-b-[3px] border-[#D9D9D9] ">
-          {pageInfo.title}
+          {pageInfo.section}
         </h1>
-        <div className="panel-control-content">{pageInfo.component}</div>
+        <div className="panel-control-content">
+          {!pageInfo.tabs
+            ? pageInfo.component
+            : <Sections tabs={pageInfo.tabs}/>
+            }
+        </div>
       </div>
     </div>
   );
 }
+
+
