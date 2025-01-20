@@ -77,6 +77,7 @@ export function AddUser({ setActiveIndex }) {
   return (
     <form
       ref={formRef}
+      autoComplete="off"
       className="flex flex-col p-8 w-[492px]"
       onSubmit={handleSubmit}
     >

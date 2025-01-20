@@ -93,9 +93,8 @@ const pages = {
 };
 
 export default function PanelControl({ adminInfo }) {
-  const match = useMatch("/admin/:page/:section?");
+  const match = useMatch("ui/admin/:page/:section?");
   const page = match?.params?.page;
-  const section = match?.params?.section;
   const [pageInfo, setPageInfo] = useState({});
 
   useEffect(() => {
@@ -104,7 +103,7 @@ export default function PanelControl({ adminInfo }) {
     } else {
       setPageInfo(pages["personal"]);
     }
-  }, [page, section]);
+  }, [page]);
 
   return (
     <div className="flex min-h-screen text-base">

@@ -1,7 +1,9 @@
+import axios from "axios";
 import config from "../config/config.js";
 import {HttpRequest} from "./Http.js";
 
 export class Streams {
+    static accessTokenKey = "accessToken";
     
     //streams
     static async getStream(streamId) {
@@ -21,9 +23,24 @@ export class Streams {
     }
 
     //profiles
+
     static async getProfiles() {
-        return await HttpRequest.request(config.stream + 'source-profile', "GET", null, true);
+        return (await axios.get(config.stream + 'source-profile', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(this.accessTokenKey)}`,
+              }
+        })).data
     }
+
+    static async createProfile(body) {
+        return (await axios.post(config.stream + 'source-profile', body, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem(this.accessTokenKey)}`,
+              }
+        })).data
+    }
+
+    
 
     //services
 }

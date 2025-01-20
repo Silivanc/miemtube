@@ -45,8 +45,6 @@ export function CreateStream() {
       is_captured: isCaptured,
     };
 
-    console.log("Form submitted:", payload);
-
     setIsLoading(true);
     try {
       const result = await Streams.planStream(payload); 
@@ -117,8 +115,8 @@ export function CreateStream() {
             Выберете источник трансляции
           </option>
           <option value="custom">Свой источник</option>
-          {profiles.map(profile => {
-            return <option key={profile.id} value={profile.source}>{profile.name}</option>
+          {Array.isArray(profiles) && profiles.map(streamSource => {
+            return <option key={streamSource.id} value={streamSource.source}>{streamSource.name}</option>
           })}
         </select>
         {isCustomSource && (

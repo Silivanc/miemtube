@@ -28,7 +28,7 @@ export function Navbar() {
       <div className="flex items-center cursor-pointer">
         <div 
         className="mr-9"
-        onClick={() => {navigate('/')}}>
+        onClick={() => {navigate(routes.root)}}>
           <svg
             width="32"
             height="32"
@@ -46,14 +46,14 @@ export function Navbar() {
           <Link
             className="mr-4"
             to={{
-              pathname: `playlists`,
+              pathname: routes.playlists
             }}
           >
             Курсы
           </Link>
           <Link
             to={{
-              pathname: `streams`,
+              pathname: routes.streams,
             }}
           >
             Трансляции
@@ -64,7 +64,7 @@ export function Navbar() {
         {!isAuth ? (
           <Link
             to={{
-              pathname: `login`,
+              pathname: routes.login,
             }}
           >
             Войти

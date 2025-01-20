@@ -5,15 +5,11 @@ import Player from "./components/Player.jsx";
 import Playlist from "./components/Playlist.jsx";
 import Stream from "./components/Stream.jsx";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import PanelControl from "./components/admin/PanelControl.jsx";
-import Playlists from "./components/Playlists.jsx";
 import { routes } from "../config/routes.js";
 import ContentLayout from "./pages/ContentLayout.jsx";
-import Playlists2 from "./components/Playlists2.jsx";
 import { Footer } from "./components/footer";
 import { Login } from "./components/login/Login";
 import { Admin } from "./pages/Admin";
-import Streams from "./components/Streams";
 
 function IsNavbar() {
   const location = useLocation();
@@ -31,7 +27,7 @@ function App() {
         <IsNavbar />
         <div className="flex-1">
           <Routes>
-            <Route path="/" element={<ContentLayout />} />
+            <Route path={routes.root} element={<ContentLayout />} />
             <Route path={routes.uploadedVideo} element={<Playlist />} />
             <Route path={routes.playlists} element={<ContentLayout />} />
             <Route path={routes.playlist} element={<Playlist />} />
@@ -42,17 +38,11 @@ function App() {
 
             <Route path={routes.login} element={<Login />} />
             <Route path={routes.admin} element={<Admin />} />
-            <Route path={routes.personal} element={<Admin />} />
 
             <Route path={routes.adminVideo} element={<Admin />} />
             <Route path={routes.adminStream} element={<Admin />} />
             <Route path={routes.adminPlaylist} element={<Admin />} />
             <Route path={routes.adminUsers} element={<Admin />} />
-
-            <Route path={routes.uploadVideo} element={<PanelControl />} />
-            <Route path={routes.uploadedVideo} element={<PanelControl />} />
-            <Route path={routes.uploadedStream} element={<PanelControl />} />
-            <Route path={routes.uploadStream} element={<PanelControl />} />
             
           </Routes>
         </div>

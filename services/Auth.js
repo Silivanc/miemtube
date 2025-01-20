@@ -110,7 +110,7 @@ export class Auth {
   static async getUsers() {
     const token = localStorage.getItem(this.accessTokenKey);
     if (token) {
-      const response = await fetch(config.auth + "?limit=10&offset=0", {
+      const response = await fetch(config.auth, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,

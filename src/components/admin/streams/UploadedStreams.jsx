@@ -17,12 +17,9 @@ export function UploadedStreams({isAdmin}) {
                 }); 
         }, [isAdmin]); 
  
-        console.log(streams); 
- 
         return ( 
-            <div className="p-0 w-full max-h-[500px] overflow-y-auto"> {/* Прокрутка по вертикали */} 
+            <div className="p-0 w-full max-h-[500px] overflow-y-auto">
                 
-                {/* Заголовок */} 
                 <div className="grid grid-cols-8 gap-4 items-center bg-gray-100 font-medium text-left p-4 border-b border-gray-300"> 
                     <span>Название</span> 
                     <span>Автор</span> 
