@@ -15,6 +15,8 @@ import { UploadedVideo } from "./video/UploadedVideo.jsx";
 import { UploadVideo } from "./video/UploadVideo.jsx";
 import { UploadedPlaylists } from "./playlists/UploadedPlaylists.jsx";
 import { Sections } from "./Sections.jsx";
+import { AddUser } from "./users/AddUser.jsx";
+import { StreamSources } from "./streams/streamSources.jsx";
 
 const pages = {
   personal: {
@@ -52,6 +54,10 @@ const pages = {
         name: "Запланировать трансляцию",
         component: <CreateStream />,
       },
+      {
+        name: "Управление источниками",
+        component: <StreamSources />,
+      },
     ],
   },
   playlist: {
@@ -80,7 +86,7 @@ const pages = {
       },
       {
         name: "Добавить пользователя",
-        component: <CreateStream key={1} />,
+        component: <AddUser />,
       },
     ],
   },
@@ -122,14 +128,13 @@ export default function PanelControl({ adminInfo }) {
           {pageInfo.section}
         </h1>
         <div className="panel-control-content">
-          {!pageInfo.tabs
-            ? pageInfo.component
-            : <Sections tabs={pageInfo.tabs}/>
-            }
+          {!pageInfo.tabs ? (
+            pageInfo.component
+          ) : (
+            <Sections tabs={pageInfo.tabs} />
+          )}
         </div>
       </div>
     </div>
   );
 }
-
-

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { cloneElement, useState } from "react";
 
 export function Sections({tabs}) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -12,7 +12,7 @@ export function Sections({tabs}) {
                     key={index}
                     onClick={() => setActiveIndex(index)}  // При клике обновляем активную вкладку
                     className={clsx(
-                        index === activeIndex ? "bg-[#D9D9D9]" : "", // Изначально первая вкладка выделена
+                        index === activeIndex ? "bg-[#D9D9D9]" : "hover:bg-[#D9D9D9]", // Изначально первая вкладка выделена
                         "h-14 w-[350px] flex justify-center items-center cursor-pointer"
                     )}
                 >
@@ -20,7 +20,9 @@ export function Sections({tabs}) {
                 </div>
             ))}
       </div>
-      {tabs && tabs[activeIndex] && tabs[activeIndex].component }
+      {tabs && tabs[activeIndex] && (
+        cloneElement(tabs[activeIndex].component, {activeIndex: activeIndex, setActiveIndex: setActiveIndex})
+      )}
     </>
       
   );

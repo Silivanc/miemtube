@@ -6,6 +6,7 @@ import linkIcon from '../../../assets/images/link.svg';
 
 export function UploadedVideo({ isAdmin }) {
     const [videos, setVideos] = useState([]);
+    const [selectedVideo, setSelectedVideo] = useState();
 
     useEffect(() => {
         Videos.getVideosWithFullInfo()
@@ -22,6 +23,10 @@ export function UploadedVideo({ isAdmin }) {
             });
     }, [isAdmin]);
 
+    const deleteVideo = () => {
+        console.log(selectedVideo);
+    }
+
     return (
         <div className="p-0 w-full max-h-[500px] overflow-y-auto"> {/* Прокрутка по вертикали */}
             {/* Заголовок */}
@@ -33,11 +38,11 @@ export function UploadedVideo({ isAdmin }) {
                 <span>Действия</span>
             </div>
 
-            {/* Данные видео */}
             {videos.length > 0 ? (
                 videos.map((video, index) => (
                     <div
                         key={index}
+                        onClick={() => setSelectedVideo(video.identifier)}
                         className="grid grid-cols-5 gap-4 items-center p-4 border-b border-gray-200 hover:bg-gray-50"
                     >
                         <span>{video.title}</span>
@@ -48,7 +53,8 @@ export function UploadedVideo({ isAdmin }) {
                             <button className="w-6 h-6 flex items-center justify-center">
                                 <img src={editIcon} alt="Редактировать" className="w-6 h-6" />
                             </button>
-                            <button className="w-6 h-6 flex items-center justify-center">
+                            <button className="w-6 h-6 flex items-center justify-center"
+                            onClick={() => deleteVideo}>
                                 <img src={trashIcon} alt="Удалить" className="w-6 h-6" />
                             </button>
                             <button className="w-6 h-6 flex items-center justify-center">

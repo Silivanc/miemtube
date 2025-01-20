@@ -84,4 +84,12 @@ export class Videos {
             url: url[0].media[0].url
         }
     }
+
+    static async deleteVideo(videoId) {
+        return await axios.delete(config.auth + "events/" + videoId, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(this.accessTokenKey)}`,
+          }
+        });
+      }
 }

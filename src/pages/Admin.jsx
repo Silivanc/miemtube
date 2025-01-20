@@ -9,33 +9,12 @@ export function Admin() {
     const page = match?.params?.page;
     const [adminInfo, setAdminInfo] = useState({});
 
-    const definePage = (page) => {
-        let newAdminInfo = {...adminInfo};
-        if (page === 'personal') {
-            newAdminInfo.title = 'Личный кабинет';
-        } else {
-            newAdminInfo.title = 'Панель управления контентом';
-        }
-
-        setAdminInfo(newAdminInfo);
-        return adminInfo
-    }
-
     useEffect(() => {
-        let newAdminInfo = {...adminInfo};
-        if (page === 'personal') {
-            newAdminInfo.title = 'Личный кабинет';
-        } else {
-            newAdminInfo.title = 'Панель управления контентом';
-        }
 
         Auth.checkMe()
 
-        setAdminInfo(newAdminInfo);
-    }, [])
+    }, [page])
     return (
-        <PanelControl adminInfo={adminInfo}>
-
-        </PanelControl>
+        <PanelControl adminInfo={adminInfo} />
     )
 }
