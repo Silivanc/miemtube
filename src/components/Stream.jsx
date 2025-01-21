@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Hls from "hls.js";
-import { HttpRequest } from "../../services/Http.js";
-import config from "../../config/config.js";
-import { Videos } from "../../services/Videos.js";
-import { ContentRequest } from "../../services/ContentRequest.js";
 import "./Player.scss";
 import { useParams } from "react-router-dom";
 import { Streams } from "../../services/Streams.js";
@@ -35,7 +30,6 @@ export default function Stream() {
       .catch((error) => console.log(error));
   }, []);
 
-  console.log(stream);
   return (
     <div className="container pt-4 flex flex-col">
       <div className="flex flex-wrap justify-start">

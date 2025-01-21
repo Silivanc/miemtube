@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.scss";
 import { Navbar } from "./components/navbar/Navbar.jsx";
 import Player from "./components/Player.jsx";
@@ -42,7 +41,6 @@ function App() {
             <Route path={routes.adminStream} element={<Admin />} />
             <Route path={routes.adminPlaylist} element={<Admin />} />
             <Route path={routes.adminUsers} element={<Admin />} />
-            
           </Routes>
         </div>
       </div>

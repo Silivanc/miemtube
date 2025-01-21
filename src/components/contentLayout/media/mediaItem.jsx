@@ -8,9 +8,9 @@ export function MediaItem({ item, type }) {
         pathname: `${type === 'playlists' ? routes.root + '/' + item?.identifier : routes.root + '/'+type+'/'+item?.identifier}`,
       }}
     >
-      <div className="w-[315px] mb-9">
-        <div className="w-[315px] h-[177px] mb-2 rounded-xl overflow-hidden bg-gray-400">
-          <img src={item?.preview || "/static/images/defaultPreview.png"} alt="Обложка" className="w-[315px h-[177px] object-cover object-center"/>
+      <div className="mb-9">
+        <div className="mb-2 rounded-xl overflow-hidden bg-gray-400">
+          <img src={item?.preview || "/ui/static/images/defaultPreview.png"} alt="Обложка" className="object-cover object-center"/>
         </div>
         <div className="flex">
           <div className="playlists-element-info-text">
