@@ -46,7 +46,7 @@ export function MediaItems({ type, length = 100, status = "", search = ""}) {
   return (
     <>
       {mediaItems.length === 0 ? (
-        <div>Нет данных</div>
+        <div className="mb-3">Нет данных</div>
       ) : (
         <div className="grid grid-cols-4 max-xl:grid-cols-3 max-md:grid-cols-2 gap-4 mx-4">
           {mediaItems.map((item, index) => {

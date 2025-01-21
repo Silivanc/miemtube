@@ -13,6 +13,17 @@ export class Streams {
     static async getStreams(limit = 100, status = "", title = "") {
         const streamStatus = (status && status !== "") ? "&stream_status=" + status : ""; 
         const streamTitle = (title && title !== "") ? "&name=" + title : ""; 
+        // const streamIsCaptured = 
+        // const res = await axios.get(config.stream + 'plan', {
+        //     headers: {
+        //         Authorization: 
+        //     },
+        //     params: {
+        //         limit,
+        //         name: title
+        //         stream_status: status
+        //     }
+        // });
         const result = await HttpRequest.request(config.stream + 'plan?limit=' + limit + streamStatus + streamTitle, "GET", null, true);
         
         return result;

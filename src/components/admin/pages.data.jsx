@@ -11,7 +11,7 @@ import { UploadedVideo } from "./video/UploadedVideo";
 import { UploadVideo } from "./video/UploadVideo";
 import { Personal } from "./personal/Personal";
 import { StreamsIcon } from "../panelControl/icons/streamsIcon";
-import { StreamSources } from "./streams/streamSources";
+import { StreamSources } from "./streams/StreamSources";
 
 export const pages = {
   personal: {

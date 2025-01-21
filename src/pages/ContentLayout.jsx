@@ -33,7 +33,7 @@ export default function ContentLayout() {
           <h1 className="text-2xl font-semibold mb-5">
             Завершенные трансляции
           </h1>
-          <MediaItems type="streams" status="FINISHED" search={searchParams.get("search")}></MediaItems>
+          <MediaItems type="streams" status="FINISHED&is_captured=true" search={searchParams.get("search")}></MediaItems>
         </>
       );
     } else {

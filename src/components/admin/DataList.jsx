@@ -3,6 +3,7 @@ import editIcon from "../../assets/images/edit.svg";
 import trashIcon from "../../assets/images/trash.svg";
 import { PopupDelete } from "./ui/Popup-delete";
 import { useSearchParams } from "react-router-dom";
+import clsx from "clsx";
 
 export function DataList({ data, deleteElement, setActiveIndex }) {
   const [display, setDisplay] = useState("hidden");
@@ -19,24 +20,31 @@ export function DataList({ data, deleteElement, setActiveIndex }) {
   };
 
   return (
-    <div className="p-0 w-full max-h-[500px] overflow-y-auto relative">
-      <div className="grid grid-cols-4 gap-4 items-center bg-gray-100 font-medium text-left p-4 border-none border-gray-300">
-        <span>Username</span>
-        <span>Имя</span>
-        <span>Почта</span>
-        <span>Действия</span>
-      </div>
-      
+    <>
       {Array.isArray(data) > 0 ? (
         <>
           {data.map((element, index) => (
             <div
               key={index}
-              className="grid grid-cols-4 gap-4 items-center border-b border-gray-200 p-4 hover:bg-gray-50"
+              className={clsx(
+                "grid gap-3 items-center border-b border-gray-200 p-4 hover:bg-gray-50",
+                "grid-cols-" + Object.entries(element).length
+              )}
             >
-              {Object.entries(element).map((elementData, index) => (
-                  elementData[0] !== 'id' && <span key={index}>{elementData[1]}</span>
-              ))}
+              {Object.entries(element).map(
+                (elementData, index) =>
+                  elementData[0] !== "id" && (
+                    // <span key={index} className="line-clamp-2 text-ellipsis">{elementData[1]}</span>
+                    <div key={index} className="relative group">
+                      <span key="truncated-text" className="line-clamp-2">
+                        {elementData[1]}
+                      </span>
+                      <span className="absolute left-0 top-full mt-1 bg-gray-900 text-white text-sm p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+                        {elementData[1]}
+                      </span>
+                    </div>
+                  )
+              )}
               <div className="flex items-center gap-2">
                 <button
                   className="w-6 h-6 flex items-center justify-center"
@@ -68,6 +76,6 @@ export function DataList({ data, deleteElement, setActiveIndex }) {
       ) : (
         <div className="p-4 text-center">Загрузка...</div>
       )}
-    </div>
+    </>
   );
 }

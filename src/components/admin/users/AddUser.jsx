@@ -60,6 +60,7 @@ export function AddUser({ setActiveIndex }) {
         user && await Auth.changeUser(payload);
       }
       formRef.current.reset();
+      setSearchParams("");
       setActiveIndex(0);
     } catch (err) {
       alert(err?.response?.data?.detail)

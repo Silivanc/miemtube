@@ -47,40 +47,6 @@ export function Users({setActiveIndex}) {
         <span>Почта</span>
         <span>Действия</span>
       </div>
-      {users.length > 0 ? (
-        <>
-          {users.map((user, index) => (
-            <div
-              key={index}
-              className="grid grid-cols-4 gap-4 items-center border-b border-gray-200 p-4 hover:bg-gray-50"
-            >
-              <span>{user.username}</span>
-              <span>{user.name}</span>
-              <span>{user.email}</span>
-              <div className="flex items-center gap-2">
-                <button className="w-6 h-6 flex items-center justify-center"
-                onClick={() => {
-                  setSearchParams({'userId': user.id})
-                  setActiveIndex(1);
-                }}
-                >
-                  <img src={editIcon} alt="Редактировать" className="w-6 h-6" />
-                </button>
-                <button className="w-6 h-6 flex items-center justify-center"
-                onClick={() => {
-                    setDisplay("");
-                    setSelectedUserId(user.id);
-                    }}>
-                  <img src={trashIcon} alt="Удалить" className="w-6 h-6" />
-                </button>
-              </div>
-            </div>
-          ))}
-          <PopupDelete display={display} setDisplay={setDisplay} deleteObject={deleteUser}/>
-        </>
-      ) : (
-        <div className="p-4 text-center">Загрузка...</div>
-      )}
       <DataList data={users} deleteElement={Auth.deleteUser} setActiveIndex={setActiveIndex}/>
     </div>
   );
