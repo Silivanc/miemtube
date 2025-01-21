@@ -130,7 +130,7 @@ export class Auth {
   static async deleteUser(userId) {
     return await axios.delete(config.auth + "takeout", {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem(this.accessTokenKey)}`,
+        Authorization: `Bearer ${localStorage.getItem(Auth.accessTokenKey)}`,
       },
       params: {
         user_id: userId
@@ -141,7 +141,7 @@ export class Auth {
   static async addUser(body) {
     return await axios.post(config.auth + "registration", body, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem(this.accessTokenKey)}`,
+        Authorization: `Bearer ${localStorage.getItem(Auth.accessTokenKey)}`,
       }
     })
   }
@@ -149,10 +149,9 @@ export class Auth {
   static async getUser(userId) {
     const users = await axios.get(config.auth, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem(this.accessTokenKey)}`,
+        Authorization: `Bearer ${localStorage.getItem(Auth.accessTokenKey)}`,
       }
     })
-
   
     if (users.data) {
       return users.data.find(user => user.id === userId);

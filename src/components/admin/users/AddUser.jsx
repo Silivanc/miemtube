@@ -11,7 +11,7 @@ export function AddUser({ setActiveIndex }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const formRef = useRef();
 
-  const userId = searchParams.get("userId");
+  const userId = searchParams.get("id");
 
   useEffect(() => {
     if (userId) {

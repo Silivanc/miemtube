@@ -9,8 +9,8 @@ export function DataList({ data, deleteElement, setActiveIndex }) {
   const [selectedElement, setSelectedElement] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const deleteUser = async () => {
-    const res = await deleteElement(selectedUserId);
+  const deleteElementHandler = async () => {
+    const res = await deleteElement(selectedElement);
     if (res) {
       setDisplay("hidden");
     } else {
@@ -26,6 +26,7 @@ export function DataList({ data, deleteElement, setActiveIndex }) {
         <span>Почта</span>
         <span>Действия</span>
       </div>
+      
       {Array.isArray(data) > 0 ? (
         <>
           {data.map((element, index) => (
@@ -34,13 +35,13 @@ export function DataList({ data, deleteElement, setActiveIndex }) {
               className="grid grid-cols-4 gap-4 items-center border-b border-gray-200 p-4 hover:bg-gray-50"
             >
               {Object.entries(element).map((elementData, index) => (
-                <span key={index}>{elementData[1]}</span>
+                  elementData[0] !== 'id' && <span key={index}>{elementData[1]}</span>
               ))}
               <div className="flex items-center gap-2">
                 <button
                   className="w-6 h-6 flex items-center justify-center"
                   onClick={() => {
-                    setSearchParams({ userId: element?.id });
+                    setSearchParams({ id: element?.id });
                     setActiveIndex(1);
                   }}
                 >
@@ -50,7 +51,7 @@ export function DataList({ data, deleteElement, setActiveIndex }) {
                   className="w-6 h-6 flex items-center justify-center"
                   onClick={() => {
                     setDisplay("");
-                    setSelectedElement(element?.id);
+                    setSelectedElement(element.id);
                   }}
                 >
                   <img src={trashIcon} alt="Удалить" className="w-6 h-6" />
@@ -61,7 +62,7 @@ export function DataList({ data, deleteElement, setActiveIndex }) {
           <PopupDelete
             display={display}
             setDisplay={setDisplay}
-            deleteObject={deleteUser}
+            deleteObject={deleteElementHandler}
           />
         </>
       ) : (

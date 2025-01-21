@@ -2,7 +2,7 @@ import { useMatch } from "react-router-dom";
 import { PanelControlButton } from "../panelControl/uikit/panelControlButton.jsx";
 import { useEffect, useState } from "react";
 import { Sections } from "./Sections.jsx";
-import { pages } from "./pages.jsx";
+import { pages } from "./pages.data.jsx";
 
 
 export default function PanelControl({ adminInfo }) {

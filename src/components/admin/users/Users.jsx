@@ -20,6 +20,7 @@ export function Users({setActiveIndex}) {
           newUser.username = user.username;
           newUser.name = user.name;
           newUser.email = user.email;
+          newUser.id = user.id;
 
           return newUser
         }));
@@ -27,7 +28,7 @@ export function Users({setActiveIndex}) {
       .catch((error) => {
         console.error("Error fetching users:", error);
       });
-  }, [display]); 
+  }, [display, users]); 
 
   const deleteUser = async () => {
     const res = await Auth.deleteUser(selectedUserId);
@@ -80,7 +81,7 @@ export function Users({setActiveIndex}) {
       ) : (
         <div className="p-4 text-center">Загрузка...</div>
       )}
-      <DataList users={users} deleteElement={Auth.deleteUser} setActiveIndex={setActiveIndex}/>
+      <DataList data={users} deleteElement={Auth.deleteUser} setActiveIndex={setActiveIndex}/>
     </div>
   );
 }
