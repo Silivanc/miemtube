@@ -22,13 +22,12 @@ function IsNavbar() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/ui">
       <div className="flex flex-col min-h-screen leading-tight">
         <IsNavbar />
         <div className="flex-1">
           <Routes>
             <Route path={routes.root} element={<ContentLayout />} />
-            <Route path={routes.uploadedVideo} element={<Playlist />} />
             <Route path={routes.playlists} element={<ContentLayout />} />
             <Route path={routes.playlist} element={<Playlist />} />
             <Route path={routes.streams} element={<ContentLayout />} />

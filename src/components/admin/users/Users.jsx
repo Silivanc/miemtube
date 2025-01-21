@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Auth } from "../../../../services/Auth";
 import editIcon from "../../../assets/images/edit.svg";
 import trashIcon from "../../../assets/images/trash.svg";
-import { Popup } from "../ui/Popup-delete";
-import { AxiosError } from "axios";
+import { PopupDelete } from "../ui/Popup-delete";
 import { useSearchParams } from "react-router-dom";
+import { DataList } from "../DataList";
 
 export function Users({setActiveIndex}) {
   const [users, setUsers] = useState([]);
@@ -15,12 +15,19 @@ export function Users({setActiveIndex}) {
   useEffect(() => {
     Auth.getUsers()
       .then((data) => {
-        setUsers(data); // присваиваем полученные данные в состояние
+        setUsers(data.map(user => {
+          let newUser = {};
+          newUser.username = user.username;
+          newUser.name = user.name;
+          newUser.email = user.email;
+
+          return newUser
+        }));
       })
       .catch((error) => {
         console.error("Error fetching users:", error);
       });
-  }, [display]); // useEffect с пустым массивом зависимостей, запускается только один раз
+  }, [display]); 
 
   const deleteUser = async () => {
     const res = await Auth.deleteUser(selectedUserId);
@@ -68,11 +75,12 @@ export function Users({setActiveIndex}) {
               </div>
             </div>
           ))}
-          <Popup display={display} setDisplay={setDisplay} deleteObject={deleteUser}/>
+          <PopupDelete display={display} setDisplay={setDisplay} deleteObject={deleteUser}/>
         </>
       ) : (
         <div className="p-4 text-center">Загрузка...</div>
       )}
+      <DataList users={users} deleteElement={Auth.deleteUser} setActiveIndex={setActiveIndex}/>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import clsx from "clsx"
 
-export function Popup({ display, setDisplay, deleteObject }) {
+export function PopupDelete({ display, setDisplay, deleteObject }) {
   return (
     <div
       className={clsx(`${display} fixed z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4`)}

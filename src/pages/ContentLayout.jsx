@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Headline } from "../components/contentLayout/Headline";
 import { MediaItems } from "@/components/contentLayout/media/mediaItems";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { routes } from "../../config/routes";
 
 export default function ContentLayout() {
   const [search, setSearch] = useState("");
@@ -11,7 +12,7 @@ export default function ContentLayout() {
 
   useEffect(() => {
     let newPageInfo = {};
-    if (location.pathname === "/playlists") {
+    if (location.pathname === routes.playlists) {
       newPageInfo.title = "Курсы";
       newPageInfo.component = () => (
         <MediaItems
@@ -19,7 +20,7 @@ export default function ContentLayout() {
           search={searchParams.get("search")}
         ></MediaItems>
       );
-    } else if (location.pathname === "/streams") {
+    } else if (location.pathname === routes.streams) {
       newPageInfo.title = "Трансляции";
       newPageInfo.component = () => (
         <>
@@ -58,8 +59,6 @@ export default function ContentLayout() {
     }
     setPageInfo(newPageInfo);
   }, [location]);
-
-  console.log(location);
 
   return (
     <div>

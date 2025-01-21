@@ -1,10 +1,11 @@
+import { routes } from "../../../../config/routes";
 import { Link } from "react-router-dom";
 
 export function MediaItem({ item, type }) {
   return (
     <Link
       to={{
-        pathname: `/${type === 'playlists' ? item?.identifier : type+'/'+item?.identifier}`,
+        pathname: `${type === 'playlists' ? routes.root + '/' + item?.identifier : routes.root + '/'+type+'/'+item?.identifier}`,
       }}
     >
       <div className="w-[315px] mb-9">
